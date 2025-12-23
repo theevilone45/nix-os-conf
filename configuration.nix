@@ -94,6 +94,7 @@
   vulkan-tools
   lm_sensors
   htop
+  furmark
   ];
 
   # Steam
