@@ -63,7 +63,6 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -72,6 +71,7 @@
     pulse.enable = true;
     wireplumber.enable = true;
   };
+
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.marcins = {
@@ -94,7 +94,8 @@
   vulkan-tools
   lm_sensors
   htop
-  furmark
+  pipewire
+  pulseaudio
   ];
 
   # Steam
@@ -118,9 +119,6 @@
     enable = true;
     powerOnBoot = true;
   };
-
-  # Enable PWM fan control
-  hardware.fancontrol.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
