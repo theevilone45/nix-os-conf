@@ -14,12 +14,20 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  boot.blacklistedKernelModules = [
+    "rtw89_8922ae"
+  ];
+  
+  # Kernel parameters for better Bluetooth performance
+  boot.kernelParams = [
+    "btusb.enable_autosuspend=0"
+    "bluetooth.disable_ertm=1"
+    "amd_pstate=active"
+  ];
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  powerManagement.cpuFreqGovernor = "schedutil";
+
+  networking.hostName = "nixos"; # Define your hostname.
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -42,13 +50,23 @@
     LC_TIME = "pl_PL.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  # Enable Hyprland
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
+  # Display Manager - needed for graphical login
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
+
+  # Enable X server (needed for display manager)
+  services.xserver.enable = true;
+
+  # AMD GPU drivers
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -72,30 +90,67 @@
     wireplumber.enable = true;
   };
 
+  services.pipewire.extraConfig.pipewire."10-latency.conf" = {
+    "context.properties" = {
+      "default.clock.quantum" = 256;
+      "default.clock.min-quantum" = 256;
+      "default.clock.max-quantum" = 256;
+    };
+  };
+
+  services.pipewire.wireplumber.extraConfig."11-bluetooth-policy" = {
+    "wireplumber.settings" = {
+      "bluetooth.autoswitch-to-headset-profile" = false;
+    };
+  };
+
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.marcins = {
     isNormalUser = true;
     description = "marcins";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
+    extraGroups = [ "networkmanager" "wheel" "input" ];
   };
 
   nixpkgs.config.allowUnfree = true;
 
+  # fonts
+  fonts = {
+    fontconfig.enable = true;
+    packages = with pkgs; [
+      font-awesome_6
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.fira-code
+    ];
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  git
-  vscode
-  mesa-demos
-  vulkan-tools
-  lm_sensors
-  htop
-  pipewire
-  pulseaudio
+    git
+    wget
+    vscode
+    firefox
+    freecad
+    orca-slicer
+    mesa-demos
+    vulkan-tools
+    lm_sensors
+    htop
+    pipewire
+    pulseaudio
+    pavucontrol
+    blueman
+    mpv
+    libsForQt5.pulseaudio-qt
+    usbutils
+    discord-ptb
+    # Hyprland related packages
+    kitty
+    waybar
+    dunst
+    wofi
+    swww
   ];
 
   # Steam
@@ -119,6 +174,8 @@
     enable = true;
     powerOnBoot = true;
   };
+
+  services.blueman.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
