@@ -149,6 +149,7 @@
     discord-ptb
     yazi
     wireshark
+    yad
     # Hyprland related packages
     kitty
     waybar

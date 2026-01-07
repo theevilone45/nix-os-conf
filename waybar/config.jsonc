@@ -18,6 +18,7 @@
         "network",
         "cpu",
         "memory",
+        "custom/audio",
         "clock",
         "custom/power"
     ],
@@ -56,5 +57,11 @@
         "format": "Power",
         "tooltip": false,
         "on-click": "~/.config/waybar/power_menu.sh"
+    },
+    "custom/audio": {
+        "exec": "~/nixos/waybar/audio_status.sh",
+        "return-type": "json",
+        "interval": 1,
+        "on-click": "~/nixos/waybar/audio_menu.sh"
     }
 }

@@ -2,7 +2,7 @@
 
 # Rofi power menu matching Waybar style
 
-options="Shutdown\n Reboot"
+options="Shutdown\nReboot"
 
 chosen=$(echo -e "$options" | rofi -dmenu -p "Power" \
     -theme-str 'window { location: northeast; anchor: northeast; x-offset: -10px; y-offset: 10px; width: 200px; }' \
@@ -14,7 +14,7 @@ case "$chosen" in
     "Shutdown")
         shutdown now
         ;;
-    " Reboot")
+    "Reboot")
         reboot
         ;;
 esac
