@@ -1,0 +1,58 @@
+// -*- mode: jsonc -*-
+{
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 40, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+    "margin-left": 10,
+    "margin-right": 10,
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "network",
+        "cpu",
+        "memory",
+        "clock",
+        "custom/power"
+    ],
+    // Modules configuration
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": false,
+        "format": "{name}: {icon}",
+        "format-icons": {
+            "active": "🟢",
+            "default": "⭕"
+        }
+    },
+    "hyprland/window": {
+        "swap-icon-label": true
+    },
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "cpu": {
+        "format": "CPU {usage}%",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "RAM {}%"
+    },
+    "network": {
+        "format-ethernet": "Network: 🟢",
+        "format-disconnected": "Network: 🔴"
+    },
+    "custom/power": {
+        "format": "Power",
+        "tooltip": false,
+        "on-click": "~/.config/waybar/power_menu.sh"
+    }
+}

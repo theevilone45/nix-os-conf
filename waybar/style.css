@@ -1,0 +1,37 @@
+window#waybar {
+    background: rgba(20, 0, 20, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 50px;
+}
+
+#workspaces,
+#network,
+#cpu,
+#memory,
+#clock,
+#custom-power {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 50px;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+#workspaces {
+    margin-left: 0px;
+}
+
+#custom-power {
+    margin-right: 0px;
+}
+
+#workspaces button {
+    background: transparent;
+    border-radius: 50px;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.10);
+}

@@ -1,0 +1,148 @@
+/* Rofi theme matching Waybar style */
+/* Semi-transparent, rounded, modern look */
+
+* {
+    /* Colors matching Waybar */
+    background:             rgba(20, 0, 20, 0.85);
+    background-alt:         rgba(255, 255, 255, 0.08);
+    foreground:             #ffffff;
+    border-color:           rgba(255, 255, 255, 0.20);
+    selected:               rgba(255, 255, 255, 0.15);
+    urgent:                 #ff6b6b;
+
+    /* Reset */
+    margin:                 0;
+    padding:                0;
+    spacing:                0;
+}
+
+window {
+    location:               northwest;
+    anchor:                 northwest;
+    x-offset:               10px;
+    y-offset:               10px;
+    width:                  500px;
+    background-color:       @background;
+    border:                 1px solid;
+    border-color:           @border-color;
+    border-radius:          24px;
+    padding:                20px;
+}
+
+mainbox {
+    background-color:       transparent;
+    children:               [ inputbar, listview ];
+    spacing:                15px;
+}
+
+inputbar {
+    background-color:       @background-alt;
+    border:                 1px solid;
+    border-color:           @border-color;
+    border-radius:          50px;
+    padding:                12px 20px;
+    children:               [ prompt, entry ];
+    spacing:                10px;
+}
+
+prompt {
+    background-color:       transparent;
+    text-color:             @foreground;
+}
+
+entry {
+    background-color:       transparent;
+    text-color:             @foreground;
+    placeholder:            "Search...";
+    placeholder-color:      rgba(255, 255, 255, 0.4);
+}
+
+listview {
+    background-color:       transparent;
+    columns:                1;
+    lines:                  15;
+    spacing:                6px;
+    scrollbar:              false;
+    fixed-height:           true;
+}
+
+element {
+    background-color:       transparent;
+    border:                 1px solid;
+    border-color:           transparent;
+    border-radius:          50px;
+    padding:                10px 16px;
+    spacing:                10px;
+}
+
+element normal.normal,
+element normal.urgent,
+element normal.active,
+element alternate.normal,
+element alternate.urgent,
+element alternate.active {
+    background-color:       transparent;
+    text-color:             @foreground;
+}
+
+element selected.normal {
+    background-color:       @background-alt;
+    border-color:           @border-color;
+    text-color:             @foreground;
+}
+
+element selected.urgent {
+    background-color:       @urgent;
+    text-color:             @background;
+}
+
+element selected.active {
+    background-color:       @selected;
+    text-color:             @foreground;
+}
+
+element-icon {
+    background-color:       transparent;
+    size:                   24px;
+    vertical-align:         0.5;
+}
+
+element-text {
+    background-color:       transparent;
+    text-color:             inherit;
+    vertical-align:         0.5;
+}
+
+/* Message and error styling */
+message {
+    background-color:       @background-alt;
+    border:                 1px solid;
+    border-color:           @border-color;
+    border-radius:          50px;
+    padding:                12px 20px;
+}
+
+textbox {
+    background-color:       transparent;
+    text-color:             @foreground;
+}
+
+/* Mode switcher (if used) */
+mode-switcher {
+    background-color:       transparent;
+    spacing:                6px;
+}
+
+button {
+    background-color:       @background-alt;
+    border:                 1px solid;
+    border-color:           @border-color;
+    border-radius:          50px;
+    padding:                8px 16px;
+    text-color:             @foreground;
+}
+
+button selected {
+    background-color:       @selected;
+    border-color:           @border-color;
+}
