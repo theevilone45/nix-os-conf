@@ -67,7 +67,7 @@ def parse_arguments():
 def print_diff(component):
     print(f"Showing differences for {component} configuration...")
     output = subprocess.run(
-        ["diff", "-r", "-u", LOCAL_CONFIG_PATHS[component], DESTINATION_PATHS[component]],
+        ["diff", "-r", "-u", DESTINATION_PATHS[component], LOCAL_CONFIG_PATHS[component]],
         capture_output=True,
         text=True
     )

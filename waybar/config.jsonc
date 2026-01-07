@@ -29,7 +29,9 @@
         "format": "{name}: {icon}",
         "format-icons": {
             "active": "🟢",
-            "default": "⭕"
+            "default": "⚪",
+            "inactive": "⚫",
+            "urgent": "🔴"
         }
     },
     "hyprland/window": {
