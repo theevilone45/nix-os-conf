@@ -2,7 +2,6 @@
 {
     // "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 40, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     "margin-left": 10,
@@ -50,8 +49,8 @@
         "format": "RAM {}%"
     },
     "network": {
-        "format-ethernet": "Network: 🟢",
-        "format-disconnected": "Network: 🔴"
+        "format-ethernet": "Network 🟢",
+        "format-disconnected": "Network 🔴"
     },
     "custom/power": {
         "format": "Power",
@@ -61,7 +60,8 @@
     "custom/audio": {
         "exec": "~/nixos/waybar/audio_status.sh",
         "return-type": "json",
-        "interval": 1,
+        "interval": 30,
+        "signal": 8,
         "on-click": "~/nixos/waybar/audio_menu.sh"
     }
 }
