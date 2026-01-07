@@ -136,7 +136,7 @@
     mesa-demos
     vulkan-tools
     lm_sensors
-    htop
+    btop
     pipewire
     pulseaudio
     pavucontrol
@@ -145,12 +145,15 @@
     libsForQt5.pulseaudio-qt
     usbutils
     discord-ptb
+    yazi
     # Hyprland related packages
     kitty
     waybar
     dunst
-    wofi
-    swww
+    rofi
+    hyprpaper
+    hyprcursor
+    rose-pine-hyprcursor
   ];
 
   # Steam
