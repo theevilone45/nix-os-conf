@@ -81,6 +81,10 @@ def dispach_action(args):
             result = print_diff(component)
             if not result or args.diff:
                 continue
+            confirm = input(f"Do you want to apply the changes to {component} configuration? (Y/n): ")
+            if confirm.lower() != 'y' or confirm == '':
+                print(f"Elo xD")
+                continue
             print(f"Rebuilding {component} configuration...")
             APPLY_COMMANDS[component]()
 
