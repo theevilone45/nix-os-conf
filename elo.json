@@ -1,0 +1,815 @@
+[
+    {
+        "index": 48,
+        "name": "alsa_card.pci-0000_03_00.1",
+        "driver": "alsa",
+        "owner_module": null,
+        "properties": {
+            "api.acp.auto-port": "false",
+            "api.acp.auto-profile": "false",
+            "api.alsa.card": "0",
+            "api.alsa.card.longname": "HDA ATI HDMI at 0xdd520000 irq 121",
+            "api.alsa.card.name": "HDA ATI HDMI",
+            "api.alsa.path": "hw:0",
+            "api.alsa.split-enable": "true",
+            "api.alsa.use-acp": "true",
+            "api.dbus.ReserveDevice1": "Audio0",
+            "api.dbus.ReserveDevice1.Priority": "-20",
+            "device.api": "alsa",
+            "device.bus": "pci",
+            "device.bus_path": "pci-0000:03:00.1",
+            "device.description": "Navi 21/23 HDMI/DP Audio Controller",
+            "device.enum.api": "udev",
+            "device.icon_name": "audio-card-analog-pci",
+            "device.name": "alsa_card.pci-0000_03_00.1",
+            "device.nick": "HDA ATI HDMI",
+            "device.plugged.usec": "2752212",
+            "device.product.id": "0xab28",
+            "device.product.name": "Navi 21/23 HDMI/DP Audio Controller",
+            "device.subsystem": "sound",
+            "sysfs.path": "/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.1/sound/card0",
+            "device.vendor.id": "0x1002",
+            "device.vendor.name": "Advanced Micro Devices, Inc. [AMD/ATI]",
+            "media.class": "Audio/Device",
+            "spa.object.id": "2",
+            "factory.id": "15",
+            "client.id": "44",
+            "object.id": "48",
+            "object.serial": "48",
+            "object.path": "alsa:acp:HDMI",
+            "alsa.card": "0",
+            "alsa.card_name": "HDA ATI HDMI",
+            "alsa.long_card_name": "HDA ATI HDMI at 0xdd520000 irq 121",
+            "alsa.driver_name": "snd_hda_intel",
+            "alsa.mixer_name": "ATI R6xx HDMI",
+            "alsa.components": "HDA:1002aa01,00aa0100,00100800",
+            "alsa.id": "HDMI",
+            "device.string": "0"
+        },
+        "profiles": {
+            "off": {
+                "description": "Off",
+                "sinks": 0,
+                "sources": 0,
+                "priority": 0,
+                "available": true
+            },
+            "output:hdmi-stereo": {
+                "description": "Digital Stereo (HDMI) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 5900,
+                "available": true
+            },
+            "output:hdmi-stereo-extra1": {
+                "description": "Digital Stereo (HDMI 2) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 5700,
+                "available": false
+            },
+            "output:hdmi-stereo-extra2": {
+                "description": "Digital Stereo (HDMI 3) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 5700,
+                "available": false
+            },
+            "output:hdmi-stereo-extra3": {
+                "description": "Digital Stereo (HDMI 4) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 5700,
+                "available": false
+            },
+            "output:hdmi-stereo-extra4": {
+                "description": "Digital Stereo (HDMI 5) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 5700,
+                "available": false
+            },
+            "output:hdmi-stereo-extra5": {
+                "description": "Digital Stereo (HDMI 6) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 5700,
+                "available": false
+            },
+            "output:hdmi-surround-extra1": {
+                "description": "Digital Surround 5.1 (HDMI 2) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 600,
+                "available": false
+            },
+            "output:hdmi-surround71-extra1": {
+                "description": "Digital Surround 7.1 (HDMI 2) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 600,
+                "available": false
+            },
+            "output:hdmi-surround-extra2": {
+                "description": "Digital Surround 5.1 (HDMI 3) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 600,
+                "available": false
+            },
+            "output:hdmi-surround71-extra2": {
+                "description": "Digital Surround 7.1 (HDMI 3) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 600,
+                "available": false
+            },
+            "output:hdmi-surround-extra3": {
+                "description": "Digital Surround 5.1 (HDMI 4) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 600,
+                "available": false
+            },
+            "output:hdmi-surround71-extra3": {
+                "description": "Digital Surround 7.1 (HDMI 4) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 600,
+                "available": false
+            },
+            "output:hdmi-surround-extra4": {
+                "description": "Digital Surround 5.1 (HDMI 5) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 600,
+                "available": false
+            },
+            "output:hdmi-surround71-extra4": {
+                "description": "Digital Surround 7.1 (HDMI 5) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 600,
+                "available": false
+            },
+            "output:hdmi-surround-extra5": {
+                "description": "Digital Surround 5.1 (HDMI 6) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 600,
+                "available": false
+            },
+            "output:hdmi-surround71-extra5": {
+                "description": "Digital Surround 7.1 (HDMI 6) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 600,
+                "available": false
+            },
+            "pro-audio": {
+                "description": "Pro Audio",
+                "sinks": 6,
+                "sources": 0,
+                "priority": 1,
+                "available": true
+            }
+        },
+        "active_profile": "output:hdmi-stereo",
+        "ports": {
+            "hdmi-output-0": {
+                "description": "HDMI / DisplayPort",
+                "type": "HDMI",
+                "priority": 5900,
+                "latency_offset": "0 usec",
+                "availability_group": "Legacy 1",
+                "availability": "available",
+                "properties": {
+                    "port.type": "hdmi",
+                    "port.availability-group": "Legacy 1",
+                    "device.icon_name": "video-display",
+                    "card.profile.port": "0",
+                    "device.product.name": "Mi Monitor",
+                    "iec958.codecs.detected": "[\"PCM\"]"
+                },
+                "profiles": [
+                    "output:hdmi-stereo"
+                ]
+            },
+            "hdmi-output-1": {
+                "description": "HDMI / DisplayPort 2",
+                "type": "HDMI",
+                "priority": 5800,
+                "latency_offset": "0 usec",
+                "availability_group": "Legacy 2",
+                "availability": "not available",
+                "properties": {
+                    "port.type": "hdmi",
+                    "port.availability-group": "Legacy 2",
+                    "device.icon_name": "video-display",
+                    "card.profile.port": "1"
+                },
+                "profiles": [
+                    "output:hdmi-stereo-extra1",
+                    "output:hdmi-surround-extra1",
+                    "output:hdmi-surround71-extra1"
+                ]
+            },
+            "hdmi-output-2": {
+                "description": "HDMI / DisplayPort 3",
+                "type": "HDMI",
+                "priority": 5700,
+                "latency_offset": "0 usec",
+                "availability_group": "Legacy 3",
+                "availability": "not available",
+                "properties": {
+                    "port.type": "hdmi",
+                    "port.availability-group": "Legacy 3",
+                    "device.icon_name": "video-display",
+                    "card.profile.port": "2"
+                },
+                "profiles": [
+                    "output:hdmi-stereo-extra2",
+                    "output:hdmi-surround-extra2",
+                    "output:hdmi-surround71-extra2"
+                ]
+            },
+            "hdmi-output-3": {
+                "description": "HDMI / DisplayPort 4",
+                "type": "HDMI",
+                "priority": 5600,
+                "latency_offset": "0 usec",
+                "availability_group": "Legacy 4",
+                "availability": "not available",
+                "properties": {
+                    "port.type": "hdmi",
+                    "port.availability-group": "Legacy 4",
+                    "device.icon_name": "video-display",
+                    "card.profile.port": "3"
+                },
+                "profiles": [
+                    "output:hdmi-stereo-extra3",
+                    "output:hdmi-surround-extra3",
+                    "output:hdmi-surround71-extra3"
+                ]
+            },
+            "hdmi-output-4": {
+                "description": "HDMI / DisplayPort 5",
+                "type": "HDMI",
+                "priority": 5500,
+                "latency_offset": "0 usec",
+                "availability_group": "Legacy 5",
+                "availability": "not available",
+                "properties": {
+                    "port.type": "hdmi",
+                    "port.availability-group": "Legacy 5",
+                    "device.icon_name": "video-display",
+                    "card.profile.port": "4"
+                },
+                "profiles": [
+                    "output:hdmi-stereo-extra4",
+                    "output:hdmi-surround-extra4",
+                    "output:hdmi-surround71-extra4"
+                ]
+            },
+            "hdmi-output-5": {
+                "description": "HDMI / DisplayPort 6",
+                "type": "HDMI",
+                "priority": 5400,
+                "latency_offset": "0 usec",
+                "availability_group": "Legacy 6",
+                "availability": "not available",
+                "properties": {
+                    "port.type": "hdmi",
+                    "port.availability-group": "Legacy 6",
+                    "device.icon_name": "video-display",
+                    "card.profile.port": "5"
+                },
+                "profiles": [
+                    "output:hdmi-stereo-extra5",
+                    "output:hdmi-surround-extra5",
+                    "output:hdmi-surround71-extra5"
+                ]
+            }
+        }
+    },
+    {
+        "index": 49,
+        "name": "alsa_card.pci-0000_75_00.1",
+        "driver": "alsa",
+        "owner_module": null,
+        "properties": {
+            "api.acp.auto-port": "false",
+            "api.acp.auto-profile": "false",
+            "api.alsa.card": "1",
+            "api.alsa.card.longname": "HD-Audio Generic at 0xdcf88000 irq 123",
+            "api.alsa.card.name": "HD-Audio Generic",
+            "api.alsa.path": "hw:1",
+            "api.alsa.split-enable": "true",
+            "api.alsa.use-acp": "true",
+            "api.dbus.ReserveDevice1": "Audio1",
+            "api.dbus.ReserveDevice1.Priority": "-20",
+            "device.api": "alsa",
+            "device.bus": "pci",
+            "device.bus_path": "pci-0000:75:00.1",
+            "device.description": "Radeon High Definition Audio Controller [Rembrandt/Strix]",
+            "device.enum.api": "udev",
+            "device.icon_name": "audio-card-analog-pci",
+            "device.name": "alsa_card.pci-0000_75_00.1",
+            "device.nick": "HD-Audio Generic",
+            "device.plugged.usec": "2752241",
+            "device.product.id": "0x1640",
+            "device.product.name": "Radeon High Definition Audio Controller [Rembrandt/Strix]",
+            "device.subsystem": "sound",
+            "sysfs.path": "/devices/pci0000:00/0000:00:08.1/0000:75:00.1/sound/card1",
+            "device.vendor.id": "0x1002",
+            "device.vendor.name": "Advanced Micro Devices, Inc. [AMD/ATI]",
+            "media.class": "Audio/Device",
+            "spa.object.id": "4",
+            "factory.id": "15",
+            "client.id": "44",
+            "object.id": "49",
+            "object.serial": "49",
+            "object.path": "alsa:acp:Generic",
+            "alsa.card": "1",
+            "alsa.card_name": "HD-Audio Generic",
+            "alsa.long_card_name": "HD-Audio Generic at 0xdcf88000 irq 123",
+            "alsa.driver_name": "snd_hda_intel",
+            "alsa.mixer_name": "ATI R6xx HDMI",
+            "alsa.components": "HDA:1002aa01,00aa0100,00100800",
+            "alsa.id": "Generic",
+            "device.string": "1"
+        },
+        "profiles": {
+            "off": {
+                "description": "Off",
+                "sinks": 0,
+                "sources": 0,
+                "priority": 0,
+                "available": true
+            },
+            "output:hdmi-stereo": {
+                "description": "Digital Stereo (HDMI) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 5900,
+                "available": false
+            },
+            "output:hdmi-stereo-extra1": {
+                "description": "Digital Stereo (HDMI 2) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 5700,
+                "available": false
+            },
+            "output:hdmi-stereo-extra2": {
+                "description": "Digital Stereo (HDMI 3) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 5700,
+                "available": false
+            },
+            "output:hdmi-surround": {
+                "description": "Digital Surround 5.1 (HDMI) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 800,
+                "available": false
+            },
+            "output:hdmi-surround71": {
+                "description": "Digital Surround 7.1 (HDMI) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 800,
+                "available": false
+            },
+            "output:hdmi-surround-extra1": {
+                "description": "Digital Surround 5.1 (HDMI 2) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 600,
+                "available": false
+            },
+            "output:hdmi-surround71-extra1": {
+                "description": "Digital Surround 7.1 (HDMI 2) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 600,
+                "available": false
+            },
+            "output:hdmi-surround-extra2": {
+                "description": "Digital Surround 5.1 (HDMI 3) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 600,
+                "available": false
+            },
+            "output:hdmi-surround71-extra2": {
+                "description": "Digital Surround 7.1 (HDMI 3) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 600,
+                "available": false
+            },
+            "pro-audio": {
+                "description": "Pro Audio",
+                "sinks": 3,
+                "sources": 0,
+                "priority": 1,
+                "available": true
+            }
+        },
+        "active_profile": "off",
+        "ports": {
+            "hdmi-output-0": {
+                "description": "HDMI / DisplayPort",
+                "type": "HDMI",
+                "priority": 5900,
+                "latency_offset": "0 usec",
+                "availability_group": "Legacy 1",
+                "availability": "not available",
+                "properties": {
+                    "port.type": "hdmi",
+                    "port.availability-group": "Legacy 1",
+                    "device.icon_name": "video-display",
+                    "card.profile.port": "0"
+                },
+                "profiles": [
+                    "output:hdmi-stereo",
+                    "output:hdmi-surround",
+                    "output:hdmi-surround71"
+                ]
+            },
+            "hdmi-output-1": {
+                "description": "HDMI / DisplayPort 2",
+                "type": "HDMI",
+                "priority": 5800,
+                "latency_offset": "0 usec",
+                "availability_group": "Legacy 2",
+                "availability": "not available",
+                "properties": {
+                    "port.type": "hdmi",
+                    "port.availability-group": "Legacy 2",
+                    "device.icon_name": "video-display",
+                    "card.profile.port": "1"
+                },
+                "profiles": [
+                    "output:hdmi-stereo-extra1",
+                    "output:hdmi-surround-extra1",
+                    "output:hdmi-surround71-extra1"
+                ]
+            },
+            "hdmi-output-2": {
+                "description": "HDMI / DisplayPort 3",
+                "type": "HDMI",
+                "priority": 5700,
+                "latency_offset": "0 usec",
+                "availability_group": "Legacy 3",
+                "availability": "not available",
+                "properties": {
+                    "port.type": "hdmi",
+                    "port.availability-group": "Legacy 3",
+                    "device.icon_name": "video-display",
+                    "card.profile.port": "2"
+                },
+                "profiles": [
+                    "output:hdmi-stereo-extra2",
+                    "output:hdmi-surround-extra2",
+                    "output:hdmi-surround71-extra2"
+                ]
+            }
+        }
+    },
+    {
+        "index": 50,
+        "name": "alsa_card.pci-0000_75_00.6",
+        "driver": "alsa",
+        "owner_module": null,
+        "properties": {
+            "api.acp.auto-port": "false",
+            "api.acp.auto-profile": "false",
+            "api.alsa.card": "2",
+            "api.alsa.card.longname": "HD-Audio Generic at 0xdcf80000 irq 124",
+            "api.alsa.card.name": "HD-Audio Generic",
+            "api.alsa.path": "hw:2",
+            "api.alsa.split-enable": "true",
+            "api.alsa.use-acp": "true",
+            "api.dbus.ReserveDevice1": "Audio2",
+            "api.dbus.ReserveDevice1.Priority": "-20",
+            "device.api": "alsa",
+            "device.bus": "pci",
+            "device.bus_path": "pci-0000:75:00.6",
+            "device.description": "Family 17h/19h/1ah HD Audio Controller",
+            "device.enum.api": "udev",
+            "device.icon_name": "audio-card-analog-pci",
+            "device.name": "alsa_card.pci-0000_75_00.6",
+            "device.nick": "HD-Audio Generic",
+            "device.plugged.usec": "2816191",
+            "device.product.id": "0x15e3",
+            "device.product.name": "Family 17h/19h/1ah HD Audio Controller",
+            "device.subsystem": "sound",
+            "sysfs.path": "/devices/pci0000:00/0000:00:08.1/0000:75:00.6/sound/card2",
+            "device.vendor.id": "0x1022",
+            "device.vendor.name": "Advanced Micro Devices, Inc. [AMD]",
+            "media.class": "Audio/Device",
+            "spa.object.id": "6",
+            "factory.id": "15",
+            "client.id": "44",
+            "object.id": "50",
+            "object.serial": "50",
+            "object.path": "alsa:acp:Generic_1",
+            "alsa.card": "2",
+            "alsa.card_name": "HD-Audio Generic",
+            "alsa.long_card_name": "HD-Audio Generic at 0xdcf80000 irq 124",
+            "alsa.driver_name": "snd_hda_intel",
+            "alsa.mixer_name": "Realtek ALC897",
+            "alsa.components": "HDA:10ec0897,104387fb,00100402",
+            "alsa.id": "Generic_1",
+            "device.string": "2"
+        },
+        "profiles": {
+            "off": {
+                "description": "Off",
+                "sinks": 0,
+                "sources": 0,
+                "priority": 0,
+                "available": true
+            },
+            "output:analog-stereo+input:analog-stereo": {
+                "description": "Analog Stereo Duplex",
+                "sinks": 1,
+                "sources": 1,
+                "priority": 6565,
+                "available": true
+            },
+            "output:analog-stereo": {
+                "description": "Analog Stereo Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 6500,
+                "available": true
+            },
+            "output:iec958-stereo+input:analog-stereo": {
+                "description": "Digital Stereo (IEC958) Output + Analog Stereo Input",
+                "sinks": 1,
+                "sources": 1,
+                "priority": 5565,
+                "available": true
+            },
+            "output:iec958-stereo": {
+                "description": "Digital Stereo (IEC958) Output",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 5500,
+                "available": true
+            },
+            "input:analog-stereo": {
+                "description": "Analog Stereo Input",
+                "sinks": 0,
+                "sources": 1,
+                "priority": 65,
+                "available": false
+            },
+            "pro-audio": {
+                "description": "Pro Audio",
+                "sinks": 2,
+                "sources": 2,
+                "priority": 1,
+                "available": true
+            }
+        },
+        "active_profile": "output:analog-stereo+input:analog-stereo",
+        "ports": {
+            "analog-input-front-mic": {
+                "description": "Front Microphone",
+                "type": "Mic",
+                "priority": 8500,
+                "latency_offset": "0 usec",
+                "availability_group": "Legacy 1",
+                "availability": "not available",
+                "properties": {
+                    "port.type": "mic",
+                    "port.availability-group": "Legacy 1",
+                    "device.icon_name": "audio-input-microphone",
+                    "card.profile.port": "0"
+                },
+                "profiles": [
+                    "input:analog-stereo",
+                    "output:analog-stereo+input:analog-stereo",
+                    "output:iec958-stereo+input:analog-stereo"
+                ]
+            },
+            "analog-input-rear-mic": {
+                "description": "Rear Microphone",
+                "type": "Mic",
+                "priority": 8200,
+                "latency_offset": "0 usec",
+                "availability_group": "Legacy 2",
+                "availability": "not available",
+                "properties": {
+                    "port.type": "mic",
+                    "port.availability-group": "Legacy 2",
+                    "device.icon_name": "audio-input-microphone",
+                    "card.profile.port": "1"
+                },
+                "profiles": [
+                    "input:analog-stereo",
+                    "output:analog-stereo+input:analog-stereo",
+                    "output:iec958-stereo+input:analog-stereo"
+                ]
+            },
+            "analog-input-linein": {
+                "description": "Line In",
+                "type": "Line",
+                "priority": 8100,
+                "latency_offset": "0 usec",
+                "availability_group": "Legacy 3",
+                "availability": "not available",
+                "properties": {
+                    "port.type": "line",
+                    "port.availability-group": "Legacy 3",
+                    "card.profile.port": "2"
+                },
+                "profiles": [
+                    "input:analog-stereo",
+                    "output:analog-stereo+input:analog-stereo",
+                    "output:iec958-stereo+input:analog-stereo"
+                ]
+            },
+            "analog-output-lineout": {
+                "description": "Line Out",
+                "type": "Line",
+                "priority": 9000,
+                "latency_offset": "0 usec",
+                "availability_group": "Legacy 4",
+                "availability": "available",
+                "properties": {
+                    "port.type": "line",
+                    "port.availability-group": "Legacy 4",
+                    "card.profile.port": "3"
+                },
+                "profiles": [
+                    "output:analog-stereo",
+                    "output:analog-stereo+input:analog-stereo"
+                ]
+            },
+            "analog-output-headphones": {
+                "description": "Headphones",
+                "type": "Headphones",
+                "priority": 9900,
+                "latency_offset": "0 usec",
+                "availability_group": "Legacy 5",
+                "availability": "not available",
+                "properties": {
+                    "port.type": "headphones",
+                    "port.availability-group": "Legacy 5",
+                    "device.icon_name": "audio-headphones",
+                    "card.profile.port": "4"
+                },
+                "profiles": [
+                    "output:analog-stereo",
+                    "output:analog-stereo+input:analog-stereo"
+                ]
+            },
+            "iec958-stereo-output": {
+                "description": "Digital Output (S/PDIF)",
+                "type": "SPDIF",
+                "priority": 0,
+                "latency_offset": "0 usec",
+                "availability_group": "",
+                "availability": "availability unknown",
+                "properties": {
+                    "port.type": "spdif",
+                    "card.profile.port": "5"
+                },
+                "profiles": [
+                    "output:iec958-stereo",
+                    "output:iec958-stereo+input:analog-stereo"
+                ]
+            }
+        }
+    },
+    {
+        "index": 3511,
+        "name": "bluez_card.84_D3_52_1D_A6_81",
+        "driver": "module-bluez5-device.c",
+        "owner_module": null,
+        "properties": {
+            "api.bluez5.address": "84:D3:52:1D:A6:81",
+            "api.bluez5.class": "0x240404",
+            "api.bluez5.connection": "connected",
+            "api.bluez5.device": "",
+            "api.bluez5.icon": "audio-headset",
+            "api.bluez5.path": "/org/bluez/hci0/dev_84_D3_52_1D_A6_81",
+            "bluez5.profile": "off",
+            "device.alias": "WH-CH720N",
+            "device.api": "bluez5",
+            "device.bus": "bluetooth",
+            "device.description": "WH-CH720N",
+            "device.form_factor": "headset",
+            "device.icon_name": "audio-headset-bluetooth",
+            "device.name": "bluez_card.84_D3_52_1D_A6_81",
+            "device.product.id": "0x0eaf",
+            "device.string": "84:D3:52:1D:A6:81",
+            "device.vendor.id": "usb:054c",
+            "media.class": "Audio/Device",
+            "spa.object.id": "2",
+            "factory.id": "15",
+            "client.id": "44",
+            "object.id": "74",
+            "object.serial": "3511"
+        },
+        "profiles": {
+            "off": {
+                "description": "Off",
+                "sinks": 0,
+                "sources": 0,
+                "priority": 0,
+                "available": true
+            },
+            "a2dp-sink-sbc": {
+                "description": "High Fidelity Playback (A2DP Sink, codec SBC)",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 18,
+                "available": true
+            },
+            "a2dp-sink-sbc_xq": {
+                "description": "High Fidelity Playback (A2DP Sink, codec SBC-XQ)",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 17,
+                "available": true
+            },
+            "a2dp-sink": {
+                "description": "High Fidelity Playback (A2DP Sink, codec AAC)",
+                "sinks": 1,
+                "sources": 0,
+                "priority": 19,
+                "available": true
+            },
+            "headset-head-unit-cvsd": {
+                "description": "Headset Head Unit (HSP/HFP, codec CVSD)",
+                "sinks": 1,
+                "sources": 1,
+                "priority": 2,
+                "available": true
+            },
+            "headset-head-unit": {
+                "description": "Headset Head Unit (HSP/HFP, codec mSBC)",
+                "sinks": 1,
+                "sources": 1,
+                "priority": 3,
+                "available": true
+            }
+        },
+        "active_profile": "a2dp-sink-sbc_xq",
+        "ports": {
+            "headset-input": {
+                "description": "Handsfree",
+                "type": "Headset",
+                "priority": 0,
+                "latency_offset": "0 usec",
+                "availability_group": "",
+                "availability": "available",
+                "properties": {
+                    "port.type": "headset"
+                },
+                "profiles": [
+                    "headset-head-unit-cvsd",
+                    "headset-head-unit"
+                ]
+            },
+            "headset-output": {
+                "description": "Headset",
+                "type": "Headset",
+                "priority": 0,
+                "latency_offset": "0 usec",
+                "availability_group": "",
+                "availability": "available",
+                "properties": {
+                    "port.type": "headset"
+                },
+                "profiles": [
+                    "a2dp-sink-sbc",
+                    "a2dp-sink-sbc_xq",
+                    "a2dp-sink"
+                ]
+            },
+            "headset-hf-output": {
+                "description": "Handsfree",
+                "type": "Headset",
+                "priority": 0,
+                "latency_offset": "0 usec",
+                "availability_group": "",
+                "availability": "available",
+                "properties": {
+                    "port.type": "headset"
+                },
+                "profiles": [
+                    "headset-head-unit-cvsd",
+                    "headset-head-unit"
+                ]
+            }
+        }
+    }
+]

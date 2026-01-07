@@ -10,6 +10,7 @@ window#waybar {
 #cpu,
 #memory,
 #clock,
+#custom-bluetooth,
 #custom-audio,
 #custom-power {
     background: rgba(255, 255, 255, 0.08);
