@@ -60,6 +60,16 @@
     xwayland.enable = true;
   };
 
+  programs.bash = {
+    interactiveShellInit = ''
+      eval "$(starship init bash)"
+    '';
+  };
+
+  environment.sessionVariables = {
+    STARSHIP_CONFIG = "/home/marcins/.config/starship/starship.toml";
+  };
+
   # Display Manager - needed for graphical login
   services.displayManager.sddm = {
     enable = true;
@@ -121,9 +131,7 @@
   fonts = {
     fontconfig.enable = true;
     packages = with pkgs; [
-      font-awesome_6
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.fira-code
+      nerd-fonts.caskaydia-cove
     ];
   };
 
@@ -151,7 +159,7 @@
     yazi
     wireshark
     jq
-    wev
+    starship
     # Font
     rose-pine-hyprcursor
     # Hyprland related packages
