@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+declare -A device_to_card
+
 # Get list of paired devices
 mapfile -t mac_adressess < <(bluetoothctl devices | awk '{print $2}')
 
@@ -20,7 +22,7 @@ for mac in "${mac_adressess[@]}"; do
         status="⚫"
     fi
     
-    options+="Device: $status $device_name\n"
+    options+="Device:  $status $device_name\n"
     ((line_count++))
     
     # If device is connected, show profiles
@@ -31,6 +33,7 @@ for mac in "${mac_adressess[@]}"; do
             current_profile=$(echo "$card_info" | jq -r '.active_profile')
             # echo "Current profile: $current_profile"
             card_name=$(echo "$card_info" | jq -r '.name')
+            device_to_card["$device_name"]="$card_name"
             mapfile -t profiles < <(echo "$card_info" | jq -r '.profiles | keys[]')
             # echo "Available profiles: ${profiles[*]}"
             
@@ -39,7 +42,7 @@ for mac in "${mac_adressess[@]}"; do
                 [[ "$profile" == "off" ]] && continue
                 
                 mark="  "
-                [[ "$profile" == "$current_profile" ]] && mark="▶ "
+                [[ "$profile" == "$current_profile" ]] && mark="🟢"
                 
                 options+="Profile: ${mark}|${device_name}|${profile}\n"
                 ((line_count++))
@@ -63,19 +66,14 @@ for mac in "${mac_adressess[@]}"; do
     # options+="$status $name|$mac\n"
 done
 
-echo "Profile to device mapping:"
-for key in "${!profile_to_device[@]}"; do
-    echo "$key => ${profile_to_device[$key]}"
-done
-
 chosen=$(echo -e "$options" | rofi -dmenu -p "Bluetooth" \
-    -theme-str 'window { location: northeast; anchor: northeast; x-offset: -10px; y-offset: 10px; width: 400px; }' \
+    -theme-str 'window { location: northeast; anchor: northeast; x-offset: -10px; y-offset: 10px; width: 450px; }' \
     -theme-str 'listview { lines: '$line_count';  }' \
     -theme-str 'inputbar { enabled: false; }' \
     -theme-str 'mainbox { children: [ listview ]; }')
 
 if [[ "$chosen" == *"Device"* ]]; then
-    device_name=$(echo "$chosen" | sed 's/Device: [🟢⚪⚫] \(.*\)/\1/')
+    device_name=$(echo "$chosen" | sed 's/Device:  [🟢⚪⚫] \(.*\)/\1/')
 
     echo "Toggling connection for device: $device_name"
     
@@ -96,10 +94,12 @@ fi
 
 if [[ "$chosen" == *"Profile"* ]]; then
     # Profile selection
-    card_name=$(echo "$chosen" | cut -d'|' -f3)
-    profile=$(echo "$chosen" | cut -d'|' -f4)
+    device_name=$(echo "$chosen" | cut -d'|' -f2)
+    profile=$(echo "$chosen" | cut -d'|' -f3)
+    card_name=${device_to_card["$device_name"]}
+    echo "Setting profile $profile for card $card_name (of device $device_name)"
     pactl set-card-profile "$card_name" "$profile"
-    pkill -RTMIN+9 waybar
+    # pkill -RTMIN+9 waybar
 fi
 # else
 #     # Device connection toggle

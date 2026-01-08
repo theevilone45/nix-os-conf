@@ -66,6 +66,8 @@
         "on-click": "~/nixos/waybar/audio_menu.sh"
     },
     "custom/bluetooth": {
+        "format": "Bluetooth",
+        "tooltip": false,
         "signal": 9,
         "on-click": "~/.config/waybar/bluetooth_menu.sh"
     }

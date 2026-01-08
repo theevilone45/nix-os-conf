@@ -2,6 +2,8 @@ window#waybar {
     background: rgba(20, 20, 20, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.10);
     border-radius: 50px;
+    color: #fff;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
     font: 14px "Mono";
 }
 
@@ -24,15 +26,44 @@ window#waybar {
 
 #workspaces {
     margin-left: 0px;
+    background: rgba(255, 20, 20, 0.1);
+}
+
+#custom-bluetooth {
+    background: rgba(20, 20, 255, 0.1);
+}
+
+#network {
+    background-color: rgba(255, 98, 0, 0.15);
+}
+
+#cpu {
+    background-color: rgba(165, 253, 0, 0.15);
+}
+
+#ram {
+    background-color: rgba(0, 255, 150, 0.15);
+}
+
+#clock {
+    background: rgba(255, 0, 157, 0.1);
+}
+
+#custom-audio {
+    background: rgba(0, 255, 255, 0.1);
 }
 
 #custom-power {
     margin-right: 0px;
+    background: rgba(255, 255, 0, 0.1);
 }
 
 #workspaces button {
     background: transparent;
     border-radius: 50px;
+    color: #fff;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+
 }
 
 #workspaces button:hover {

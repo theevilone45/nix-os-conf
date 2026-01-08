@@ -1,8 +1,4 @@
-/* Rofi theme matching Waybar style */
-/* Semi-transparent, rounded, modern look */
-
 * {
-    /* Colors matching Waybar */
     background:             rgba(20, 20, 20, 0.85);
     background-alt:         rgba(255, 255, 255, 0.08);
     foreground:             #ffffff;

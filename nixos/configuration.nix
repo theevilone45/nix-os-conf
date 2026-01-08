@@ -34,6 +34,8 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  programs.wireshark.enable = true;
+
   # Set your time zone.
   time.timeZone = "Europe/Warsaw";
 
@@ -106,12 +108,11 @@
     };
   };
 
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.marcins = {
     isNormalUser = true;
     description = "marcins";
-    extraGroups = [ "networkmanager" "wheel" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "wireshark"];
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -150,6 +151,9 @@
     yazi
     wireshark
     jq
+    wev
+    # Font
+    rose-pine-hyprcursor
     # Hyprland related packages
     kitty
     waybar
@@ -157,7 +161,7 @@
     rofi
     hyprpaper
     hyprcursor
-    rose-pine-hyprcursor
+    hyprshot
   ];
 
   # Steam
