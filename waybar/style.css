@@ -4,7 +4,7 @@ window#waybar {
     border-radius: 50px;
     color: #fff;
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
-    font: 14px "Mono";
+    font: 14px "CaskaydiaCove Nerd Font";
 }
 
 #workspaces,

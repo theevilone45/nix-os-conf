@@ -160,6 +160,7 @@
     wireshark
     jq
     starship
+    nerdfetch
     # Font
     rose-pine-hyprcursor
     # Hyprland related packages
