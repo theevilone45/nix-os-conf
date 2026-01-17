@@ -63,7 +63,13 @@
   programs.bash = {
     interactiveShellInit = ''
       eval "$(starship init bash)"
+      eval "$(direnv hook bash)"
     '';
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
   };
 
   environment.sessionVariables = {
@@ -141,6 +147,7 @@
     git
     wget
     vscode
+    inetutils
     firefox
     freecad
     orca-slicer
@@ -148,6 +155,7 @@
     vulkan-tools
     lm_sensors
     btop
+    furmark
     pipewire
     pulseaudio
     pavucontrol
@@ -161,6 +169,9 @@
     jq
     starship
     nerdfetch
+    unzip
+    tcpdump
+    zed-editor
     # Font
     rose-pine-hyprcursor
     # Hyprland related packages
@@ -171,6 +182,7 @@
     hyprpaper
     hyprcursor
     hyprshot
+    hyprpicker
   ];
 
   # Steam

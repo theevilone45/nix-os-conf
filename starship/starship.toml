@@ -23,10 +23,12 @@ $nim\
 $rust\
 $scala\
 [](fg:#86BBD8 bg:#06969A)\
-$docker_context\
+$nix_shell\
 [](fg:#06969A bg:#33658A)\
 $time\
 [ ](fg:#33658A)\
+$status
+\n$character
 """
 
 # Disable the blank line at the start of the prompt
@@ -76,11 +78,6 @@ symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
-[docker_context]
-symbol = " "
-style = "bg:#06969A"
-format = '[ $symbol $context ]($style)'
-
 [elixir]
 symbol = " "
 style = "bg:#86BBD8"
@@ -125,7 +122,7 @@ style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
 [nodejs]
-symbol = ""
+symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
@@ -135,7 +132,7 @@ style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
 [rust]
-symbol = ""
+symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
@@ -144,8 +141,12 @@ symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
+[nix_shell]
+style = "bg:#06969A fg:#000000"
+format = '[ $name ]($style)'
+
 [time]
 disabled = false
 time_format = "%R" # Hour:Minute Format
 style = "bg:#33658A"
-format = '[ ♥ $time ]($style)'
+format = '[ $time ]($style)'
