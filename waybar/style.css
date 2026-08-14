@@ -1,71 +1,64 @@
 window#waybar {
-    background: rgba(20, 20, 20, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    border-radius: 50px;
+    background: rgba(20, 20, 20, 0.85);
     color: #fff;
-    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
-    font: 14px "CaskaydiaCove Nerd Font";
+    text-shadow:
+        1px 0 0 #000,
+        0 -1px 0 #000,
+        0 1px 0 #000,
+        -1px 0 0 #000;
+    font: 20px "CaskaydiaCove Nerd Font";
 }
 
 #workspaces,
 #network,
 #cpu,
+#temperature,
 #memory,
 #clock,
 #custom-bluetooth,
 #custom-audio,
 #custom-power {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    border-radius: 50px;
     padding-left: 12px;
     padding-right: 12px;
-    margin-left: 6px;
-    margin-right: 6px;
+}
+
+#network:hover,
+#cpu:hover,
+#temperature:hover,
+#memory:hover,
+#clock:hover,
+#custom-bluetooth:hover,
+#custom-audio:hover {
+    background: rgba(2, 137, 99, 0.5);
 }
 
 #workspaces {
     margin-left: 0px;
-    background: rgba(255, 20, 20, 0.1);
 }
 
-#custom-bluetooth {
-    background: rgba(20, 20, 255, 0.1);
-}
-
-#network {
-    background-color: rgba(255, 98, 0, 0.15);
-}
-
-#cpu {
-    background-color: rgba(165, 253, 0, 0.15);
-}
-
-#ram {
-    background-color: rgba(0, 255, 150, 0.15);
-}
-
-#clock {
-    background: rgba(255, 0, 157, 0.1);
-}
-
-#custom-audio {
-    background: rgba(0, 255, 255, 0.1);
+#temperature.critical {
+    background-color: rgba(255, 0, 0, 0.3);
 }
 
 #custom-power {
     margin-right: 0px;
-    background: rgba(255, 255, 0, 0.1);
+    background: rgba(255, 0, 0, 0.2);
+}
+
+#custom-power:hover {
+    background: rgba(255, 0, 0, 0.5);
 }
 
 #workspaces button {
     background: transparent;
-    border-radius: 50px;
     color: #fff;
-    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
-
+    text-shadow:
+        1px 0 0 #000,
+        0 -1px 0 #000,
+        0 1px 0 #000,
+        -1px 0 0 #000;
 }
 
 #workspaces button:hover {
-    background: rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.1);
 }

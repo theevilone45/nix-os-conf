@@ -7,10 +7,9 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -19,7 +18,7 @@
   boot.blacklistedKernelModules = [
     "rtw89_8922ae"
   ];
-  
+
   # Kernel parameters for better Bluetooth performance
   boot.kernelParams = [
     "btusb.enable_autosuspend=0"
@@ -35,6 +34,11 @@
   networking.networkmanager.enable = true;
 
   programs.wireshark.enable = true;
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Warsaw";
@@ -94,6 +98,10 @@
     variant = "";
   };
 
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTR{idVendor}=="2341", ATTR{idProduct}=="0070", TAG+="uaccess"
+  '';
+
   # Configure console keymap
   console.keyMap = "pl2";
 
@@ -128,7 +136,13 @@
   users.users.marcins = {
     isNormalUser = true;
     description = "marcins";
-    extraGroups = [ "networkmanager" "wheel" "input" "wireshark"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "input"
+      "wireshark"
+      "dialout"
+    ];
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -141,20 +155,28 @@
     ];
   };
 
+  # services.tailscale.enable = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     git
+    neovim
+    zed-editor
     wget
-    vscode
+    #p7zip
     inetutils
-    firefox
+    qutebrowser
     freecad
     orca-slicer
     mesa-demos
     vulkan-tools
     lm_sensors
     btop
+    ripgrep
+    vlc
+    zathura
+    qbittorrent
     furmark
     pipewire
     pulseaudio
@@ -165,13 +187,13 @@
     usbutils
     discord-ptb
     yazi
-    wireshark
     jq
     starship
     nerdfetch
     unzip
     tcpdump
-    zed-editor
+    radeontop
+    universal-ctags
     # Font
     rose-pine-hyprcursor
     # Hyprland related packages
@@ -183,7 +205,27 @@
     hyprcursor
     hyprshot
     hyprpicker
+    opentabletdriver
+    udiskie
+    krita
+    yafc-ce
+    testdisk
+    # tailscale
+
+    (makeDesktopItem {
+      name = "yafc-ce";
+      desktopName = "YAFC Community Edition";
+      comment = "Factorio calculator";
+      exec = "Yafc";
+      terminal = false;
+      categories = [
+        "Game"
+        "Utility"
+      ];
+    })
   ];
+
+  programs.nix-ld.enable = true;
 
   # Steam
   programs.steam = {
@@ -193,6 +235,8 @@
   };
   programs.gamemode.enable = true;
 
+  programs.xwayland.enable = true;
+
   # GPU
   hardware.graphics = {
     enable = true;
@@ -200,7 +244,7 @@
   };
   hardware.enableRedistributableFirmware = true;
   services.udev.packages = with pkgs; [ game-devices-udev-rules ];
-  
+
   # Bluetooth
   hardware.bluetooth = {
     enable = true;
@@ -208,6 +252,23 @@
   };
 
   services.blueman.enable = true;
+
+  hardware.opentabletdriver.enable = true;
+  hardware.uinput.enable = true;
+  boot.kernelModules = [ "uinput" ];
+
+  # Firewall:
+  # - Tailscale itself may establish direct connections.
+  # - Factorio 34197/UDP is accessible ONLY through tailscale0.
+  # networking.firewall = {
+  #   allowedUDPPorts = [
+  #     config.services.tailscale.port
+  #   ];
+
+  #   interfaces."tailscale0".allowedUDPPorts = [
+  #     34197
+  #   ];
+  # };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

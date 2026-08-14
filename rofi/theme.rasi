@@ -2,7 +2,7 @@
     background:             rgba(20, 20, 20, 0.85);
     background-alt:         rgba(255, 255, 255, 0.08);
     foreground:             #ffffff;
-    border-color:           rgba(255, 255, 255, 0.20);
+    border-color:           rgb(2, 137, 99);
     selected:               rgba(255, 255, 255, 0.15);
     urgent:                 #ff6b6b;
 
@@ -19,9 +19,8 @@ window {
     y-offset:               10px;
     width:                  500px;
     background-color:       @background;
-    border:                 1px solid;
+    border:                 2px solid;
     border-color:           @border-color;
-    border-radius:          24px;
     padding:                20px;
 }
 
@@ -35,7 +34,6 @@ inputbar {
     background-color:       @background-alt;
     border:                 1px solid;
     border-color:           @border-color;
-    border-radius:          50px;
     padding:                12px 20px;
     children:               [ prompt, entry ];
     spacing:                10px;
@@ -66,7 +64,6 @@ element {
     background-color:       transparent;
     border:                 1px solid;
     border-color:           transparent;
-    border-radius:          50px;
     padding:                10px 16px;
     spacing:                10px;
 }
@@ -114,7 +111,6 @@ message {
     background-color:       @background-alt;
     border:                 1px solid;
     border-color:           @border-color;
-    border-radius:          50px;
     padding:                12px 20px;
 }
 
@@ -133,7 +129,6 @@ button {
     background-color:       @background-alt;
     border:                 1px solid;
     border-color:           @border-color;
-    border-radius:          50px;
     padding:                8px 16px;
     text-color:             @foreground;
 }

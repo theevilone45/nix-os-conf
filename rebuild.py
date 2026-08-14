@@ -2,7 +2,6 @@
 
 import argparse
 import glob
-from importlib.resources import files
 import os
 import stat
 import subprocess
@@ -35,8 +34,9 @@ def apply_nixos_rebuild():
     print(output.stdout)
     output = subprocess.run(["sudo", "-S", "nixos-rebuild", "switch"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, input=password_input, encoding="utf-8")
     print(output.stdout)
+    print(output.stderr)
 
-def apply_standard_rebuild(component):
+def apply_standard_rebuild(component: str):
     files = glob.glob(f"{LOCAL_CONFIG_PATHS[component]}*")
     output = subprocess.run(["cp", "-pv"] + files + [DESTINATION_PATHS[component]], capture_output=True, text=True)
     print(output.stdout)
