@@ -166,6 +166,7 @@
     wget
     firefox
     claude-code
+    uv
     #p7zip
     inetutils
     qutebrowser

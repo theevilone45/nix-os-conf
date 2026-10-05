@@ -59,7 +59,7 @@
   "custom/power": {
     "format": "Power",
     "tooltip": false,
-    "on-click": "~/.config/waybar/power_menu.sh",
+    "on-click": "~/nixos/waybar/power_menu.sh",
   },
   "custom/audio": {
     "exec": "~/nixos/waybar/audio_status.sh",
@@ -71,6 +71,6 @@
   "custom/bluetooth": {
     "format": "Bluetooth",
     "tooltip": false,
-    "on-click": "~/.config/waybar/bluetooth_menu.sh",
+    "on-click": "~/nixos/waybar/bluetooth_menu.sh",
   },
 }
