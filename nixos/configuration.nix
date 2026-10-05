@@ -164,6 +164,8 @@
     neovim
     zed-editor
     wget
+    firefox
+    claude-code
     #p7zip
     inetutils
     qutebrowser
@@ -210,6 +212,7 @@
     krita
     yafc-ce
     testdisk
+    bibata-cursors
     # tailscale
 
     (makeDesktopItem {
