@@ -9,6 +9,7 @@ Item {
     property bool busy: false
     property string error: ""
     property bool wallpaper: true
+    property string wallpaperPath: Theme.wallpaper
 
     signal submit(string password)
 
@@ -24,7 +25,7 @@ Item {
     Image {
         anchors.fill: parent
         visible: root.wallpaper
-        source: root.wallpaper ? "file://" + Theme.wallpaper : ""
+        source: root.wallpaper ? "file://" + root.wallpaperPath : ""
         fillMode: Image.PreserveAspectCrop
         asynchronous: true
     }

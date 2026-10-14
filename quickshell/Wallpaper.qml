@@ -23,7 +23,7 @@ Variants {
 
         Image {
             anchors.fill: parent
-            source: "file://" + Theme.wallpaper
+            source: "file://" + WallpaperPicker.path
             fillMode: Image.PreserveAspectCrop
             asynchronous: true
         }

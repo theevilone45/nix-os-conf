@@ -108,6 +108,32 @@ Variants {
             }
         }
 
+        // Wallpaper button, opens the yazi picker
+        Item {
+            id: wallpaperButton
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: bluetoothButton.left
+            anchors.rightMargin: 16
+            width: wallpaperText.implicitWidth
+            height: parent.height
+
+            Text {
+                id: wallpaperText
+                anchors.centerIn: parent
+                text: "Wallpaper"
+                color: Theme.fg
+                font.family: Theme.font
+                font.pixelSize: Theme.fontSize
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    bar.openPanel = "";
+                    WallpaperPicker.pick();
+                }
+            }
+        }
+
         // Bluetooth trigger, opens the paired devices panel
         Item {
             id: bluetoothButton

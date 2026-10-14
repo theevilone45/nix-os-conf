@@ -63,6 +63,7 @@ Scope {
             LockContent {
                 id: content
                 anchors.fill: parent
+                wallpaperPath: WallpaperPicker.path
                 busy: root.busy
                 error: root.error
                 onSubmit: password => root.submit(password)

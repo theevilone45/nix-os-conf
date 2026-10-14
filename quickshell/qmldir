@@ -1,5 +1,6 @@
 singleton Theme Theme.qml
 singleton Favourites Favourites.qml
+singleton WallpaperPicker WallpaperPicker.qml
 Bar Bar.qml
 Calendar Calendar.qml
 Lock Lock.qml
