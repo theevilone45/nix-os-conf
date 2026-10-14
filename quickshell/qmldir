@@ -4,3 +4,6 @@ Calendar Calendar.qml
 Lock Lock.qml
 PowerPanel PowerPanel.qml
 Wallpaper Wallpaper.qml
+AudioPanel AudioPanel.qml
+MixerRow MixerRow.qml
+VolumeSlider VolumeSlider.qml

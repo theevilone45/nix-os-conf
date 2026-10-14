@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Hyprland
+import Quickshell.Services.Pipewire
 import QtQuick
 
 Variants {
@@ -23,7 +24,7 @@ Variants {
         implicitHeight: 30
         color: Theme.bg
 
-        // Which panel is open: "", "calendar" or "power". Only one at a time.
+        // Which panel is open: "", "calendar", "audio" or "power". Only one at a time.
         property string openPanel: ""
         function toggle(name) {
             openPanel = openPanel === name ? "" : name;
@@ -62,6 +63,34 @@ Variants {
                         onClicked: Hyprland.dispatch("workspace " + ws.modelData.id)
                     }
                 }
+            }
+        }
+
+        // Audio trigger: live default output volume, opens the mixer
+        PwObjectTracker {
+            objects: [Pipewire.defaultAudioSink]
+        }
+        Item {
+            id: audioButton
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: clock.left
+            anchors.rightMargin: 16
+            width: audioText.implicitWidth
+            height: parent.height
+
+            readonly property var audio: Pipewire.defaultAudioSink ? Pipewire.defaultAudioSink.audio : null
+
+            Text {
+                id: audioText
+                anchors.centerIn: parent
+                text: !audioButton.audio ? "Audio" : (audioButton.audio.muted ? "Audio muted" : "Audio " + Math.round(audioButton.audio.volume * 100) + "%")
+                color: Theme.fg
+                font.family: Theme.font
+                font.pixelSize: Theme.fontSize
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: bar.toggle("audio")
             }
         }
 
@@ -135,6 +164,23 @@ Variants {
         }
 
         PopupWindow {
+            id: audioPopup
+            anchor.item: audioButton
+            anchor.edges: Edges.Bottom | Edges.Right
+            anchor.gravity: Edges.Bottom | Edges.Left
+            anchor.margins.top: 5
+            implicitWidth: audioPanel.implicitWidth
+            implicitHeight: audioPanel.implicitHeight
+            visible: bar.openPanel === "audio"
+            color: "transparent"
+
+            AudioPanel {
+                id: audioPanel
+                anchors.fill: parent
+            }
+        }
+
+        PopupWindow {
             id: powerPopup
             anchor.item: powerButton
             anchor.edges: Edges.Bottom | Edges.Right
@@ -155,7 +201,7 @@ Variants {
         // Close any panel on outside click; the bar is included so clicking
         // a trigger toggles instead of close-then-reopen.
         HyprlandFocusGrab {
-            windows: [calendarPopup, powerPopup, bar]
+            windows: [calendarPopup, audioPopup, powerPopup, bar]
             active: bar.openPanel !== ""
             onCleared: bar.openPanel = ""
         }
