@@ -8,6 +8,9 @@ Item {
     required property PwNode node
     property string label: ""
 
+    // The node can vanish briefly, e.g. when a Bluetooth profile switch recreates it.
+    readonly property var audio: node ? node.audio : null
+
     height: 28
 
     Text {
@@ -27,11 +30,11 @@ Item {
         anchors.leftMargin: 8
         anchors.right: pct.left
         anchors.rightMargin: 8
-        value: root.node.audio ? root.node.audio.volume : 0
-        muted: root.node.audio ? root.node.audio.muted : false
+        value: root.audio ? root.audio.volume : 0
+        muted: root.audio ? root.audio.muted : false
         onMoved: v => {
-            if (root.node.audio)
-                root.node.audio.volume = v;
+            if (root.audio)
+                root.audio.volume = v;
         }
     }
     Text {
@@ -41,7 +44,7 @@ Item {
         anchors.rightMargin: 8
         width: 36
         horizontalAlignment: Text.AlignRight
-        text: root.node.audio ? Math.round(root.node.audio.volume * 100) + "%" : ""
+        text: root.audio ? Math.round(root.audio.volume * 100) + "%" : ""
         color: Theme.dim
         font.family: Theme.font
         font.pixelSize: Theme.fontSize - 2
@@ -50,15 +53,15 @@ Item {
         id: mute
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
-        text: root.node.audio && root.node.audio.muted ? "🔇" : "🔊"
+        text: root.audio && root.audio.muted ? "🔇" : "🔊"
         font.pixelSize: Theme.fontSize
 
         MouseArea {
             anchors.fill: parent
             anchors.margins: -4
             onClicked: {
-                if (root.node.audio)
-                    root.node.audio.muted = !root.node.audio.muted;
+                if (root.audio)
+                    root.audio.muted = !root.audio.muted;
             }
         }
     }

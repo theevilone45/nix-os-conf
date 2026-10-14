@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Hyprland
+import Quickshell.Bluetooth
 import Quickshell.Services.Pipewire
 import QtQuick
 
@@ -24,7 +25,7 @@ Variants {
         implicitHeight: 30
         color: Theme.bg
 
-        // Which panel is open: "", "calendar", "audio" or "power". Only one at a time.
+        // Which panel is open: "", "calendar", "audio", "bluetooth" or "power". Only one at a time.
         property string openPanel: ""
         function toggle(name) {
             openPanel = openPanel === name ? "" : name;
@@ -63,6 +64,29 @@ Variants {
                         onClicked: Hyprland.dispatch("workspace " + ws.modelData.id)
                     }
                 }
+            }
+        }
+
+        // Bluetooth trigger, opens the paired devices panel
+        Item {
+            id: bluetoothButton
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: audioButton.left
+            anchors.rightMargin: 16
+            width: bluetoothText.implicitWidth
+            height: parent.height
+
+            Text {
+                id: bluetoothText
+                anchors.centerIn: parent
+                text: Bluetooth.defaultAdapter && !Bluetooth.defaultAdapter.enabled ? "Bluetooth off" : "Bluetooth"
+                color: Theme.fg
+                font.family: Theme.font
+                font.pixelSize: Theme.fontSize
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: bar.toggle("bluetooth")
             }
         }
 
@@ -164,6 +188,24 @@ Variants {
         }
 
         PopupWindow {
+            id: bluetoothPopup
+            anchor.item: bluetoothButton
+            anchor.edges: Edges.Bottom | Edges.Right
+            anchor.gravity: Edges.Bottom | Edges.Left
+            anchor.margins.top: 5
+            implicitWidth: bluetoothPanel.implicitWidth
+            implicitHeight: bluetoothPanel.implicitHeight
+            visible: bar.openPanel === "bluetooth"
+            color: "transparent"
+
+            BluetoothPanel {
+                id: bluetoothPanel
+                anchors.fill: parent
+                open: bluetoothPopup.visible
+            }
+        }
+
+        PopupWindow {
             id: audioPopup
             anchor.item: audioButton
             anchor.edges: Edges.Bottom | Edges.Right
@@ -201,7 +243,7 @@ Variants {
         // Close any panel on outside click; the bar is included so clicking
         // a trigger toggles instead of close-then-reopen.
         HyprlandFocusGrab {
-            windows: [calendarPopup, audioPopup, powerPopup, bar]
+            windows: [calendarPopup, bluetoothPopup, audioPopup, powerPopup, bar]
             active: bar.openPanel !== ""
             onCleared: bar.openPanel = ""
         }

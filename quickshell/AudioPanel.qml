@@ -48,7 +48,7 @@ Rectangle {
             active: Pipewire.defaultAudioSink !== null
             sourceComponent: MixerRow {
                 node: Pipewire.defaultAudioSink
-                label: node.description || node.name
+                label: node ? (node.description || node.name) : ""
             }
         }
 
@@ -101,18 +101,6 @@ Rectangle {
                 width: col.width
                 node: modelData
                 label: root.appName(modelData)
-            }
-        }
-
-        Header {
-            text: "MICROPHONE"
-        }
-        Loader {
-            width: parent.width
-            active: Pipewire.defaultAudioSource !== null
-            sourceComponent: MixerRow {
-                node: Pipewire.defaultAudioSource
-                label: node.description || node.name
             }
         }
     }

@@ -7,3 +7,4 @@ Wallpaper Wallpaper.qml
 AudioPanel AudioPanel.qml
 MixerRow MixerRow.qml
 VolumeSlider VolumeSlider.qml
+BluetoothPanel BluetoothPanel.qml
