@@ -10,22 +10,22 @@ sources: []
 
 ## Why
 
-A vision and consolidation effort for a single-user NixOS/Hyprland desktop (3440×1440 ultrawide). The shell is split across waybar, three rofi-dmenu shell scripts, rofi's launcher, and hyprpaper. Each has its own config, theme and refresh hack (`pkill -RTMIN+8 waybar`), and the panels are text menus without sliders or per-app control. Quickshell gives one declaratively styled QML shell for bar, panels, launcher, wallpaper and lock screen, deployable through the existing `rebuild.py` workflow.
+A vision and consolidation effort for a single-user NixOS/Hyprland desktop (3440×1440 ultrawide). The shell was split across waybar, three rofi-dmenu shell scripts, rofi's launcher, and hyprpaper. Each had its own config, theme and refresh hack (`pkill -RTMIN+8 waybar`), and the panels were text menus without sliders or per-app control. Quickshell gives one declaratively styled QML shell for bar, panels, launcher, wallpaper and lock screen, deployable through the existing `rebuild.py` workflow.
 
 ## Capabilities
 
 - **CAP-1**
   - **intent:** The shell paints the desktop wallpaper on DP-1, replacing hyprpaper.
-  - **success:** With hyprpaper stopped, `~/Wallpapers/Unkown.jpg` shows on DP-1 after login. Changing the configured path and reloading changes the image without restarting Hyprland.
+  - **success:** With hyprpaper not installed, `~/Wallpapers/Unkown.jpg` shows on DP-1 after login. Changing the path in `quickshell/Theme.qml` and saving changes the image without restarting Hyprland.
 - **CAP-2**
   - **intent:** The user can lock the session and unlock it with their password; nothing is visible or interactive until authentication.
-  - **success:** A wrong password stays locked, the correct one unlocks, and windows are neither visible nor clickable while locked.
+  - **success:** A wrong password stays locked, the correct one unlocks, and windows are neither visible nor clickable while locked. SUPER+L and the power panel both lock.
 - **CAP-3**
   - **intent:** The user can shut down, reboot or lock from one power panel.
   - **success:** Each entry performs its action.
 - **CAP-4**
   - **intent:** The user can see and set output volume and mute, choose the default output, and adjust per-application stream volume.
-  - **success:** Changing the default output moves existing streams to it. Volume keys and the panel stay in sync with no signal hack.
+  - **success:** Changing the default output moves existing streams to it. Volume keys and the panel stay in sync with no signal hack, and the bar shows the live volume.
 - **CAP-5**
   - **intent:** The user can see paired Bluetooth devices, connect or disconnect them, and switch the audio profile of a connected device.
   - **success:** After connecting a headset its profiles appear within about 2 s. Selecting one applies it, and the active one is marked.
@@ -34,44 +34,35 @@ A vision and consolidation effort for a single-user NixOS/Hyprland desktop (3440
   - **success:** The clock shows the current time. The calendar shows the current month with today highlighted.
 - **CAP-7**
   - **intent:** A minimal bar shows workspaces and the clock and hosts the entry points to the panels.
-  - **success:** Workspace switching state is reflected live, and every panel (CAP-3, 4, 5, 6) opens from the bar.
+  - **success:** Workspace state is reflected live, and the calendar, audio, Bluetooth and power panels each open from the bar, one at a time.
 - **CAP-8**
   - **intent:** The user can search and launch installed applications, replacing rofi drun.
-  - **success:** SUPER+R opens the launcher, typing filters installed apps, Enter launches the selection, and Esc closes it.
+  - **success:** SUPER+R opens the launcher, typing filters installed apps, Enter launches the selection (terminal apps in kitty), and Esc closes it.
 
 ## Constraints
 
-- Edit only repo files and deploy through `rebuild.py` with a new Quickshell component; never edit `~/.config/` directly.
+- Edit only repo files and deploy through `rebuild.py` with a Quickshell component (`-q`); never edit `~/.config/` directly.
 - Never run `nixos-rebuild`: package and service changes go in `nixos/configuration.nix` and the user applies them.
-- NixOS 25.11 channel: Quickshell must come from that channel or a pinned flake input.
+- NixOS 25.11 channel: Quickshell comes from that channel (0.2.1).
 - Single target: Hyprland on DP-1 at 3440×1440@144. No multi-monitor or laptop support.
-- The session lock must use `ext-session-lock`, so a crashed lock surface cannot expose the session.
-- Audio goes through PipeWire/WirePlumber and Bluetooth through BlueZ, using native Quickshell services; no new shell-script backends.
-- waybar, rofi and hyprpaper are removed only after parity, so the desktop is never left without a bar or wallpaper.
+- The session lock must use `ext-session-lock`, so a crashed lock surface cannot expose the session. Authentication goes through the `quickshell` PAM service declared in `configuration.nix`.
+- Audio goes through PipeWire/WirePlumber and Bluetooth through BlueZ, using native Quickshell services; no new shell-script backends. The one exception is Bluetooth audio profile listing and switching, which calls `pactl` because Quickshell exposes no PipeWire card profiles.
+- `rebuild.py` copies files without recursing, so `quickshell/` stays flat, and every QML type must be listed in `quickshell/qmldir`.
 
 ## Non-goals
 
 - No widget kit or general theming framework.
 - No notifications, tray or OSD; dunst stays.
 - No Bluetooth scan or pairing; that stays in blueman.
+- No microphone controls in the audio panel.
 - Waybar's CPU, temperature, RAM, network and window-title modules are dropped on purpose.
 - No multi-monitor support.
 - No SDDM login-screen replacement.
 
 ## Success signal
 
-After a `rebuild.py` deploy and a Hyprland restart, the desktop runs with waybar, rofi and hyprpaper uninstalled or stopped. Wallpaper, bar, launcher, audio panel, Bluetooth panel, power panel and lock screen all work as CAP-1 to CAP-8 describe.
-
-## Assumptions
-
-- The Quickshell config lives in `quickshell/` in this repo, is deployed to `~/.config/quickshell` by `rebuild.py`, and is started through Hyprland `exec-once`.
-- Success signal drafted by the assistant from the capabilities; not yet confirmed by the user.
+The desktop runs on Quickshell alone, with waybar, rofi and hyprpaper gone from the repo and the system packages. Wallpaper, bar, launcher, audio panel, Bluetooth panel, power panel and lock screen all work as CAP-1 to CAP-8 describe.
 
 ## Open Questions
 
-- Should idle auto-lock (hypridle) or lock-on-suspend be in scope? Neither was requested.
-- Should the lock have triggers beyond a keybind and the power-panel entry?
-- Does the Quickshell version in nixpkgs 25.11 provide the Pipewire, Bluetooth, SessionLock and Hyprland modules needed? Verify before implementation.
-- How is the PAM service for the lock screen declared in `configuration.nix`?
-- Is the wallpaper a single static image, or selectable or rotating?
-- Reuse the current greens and whites (Hyprland borders), or a new palette?
+- Should idle auto-lock (hypridle) or lock-on-suspend be in scope? Neither was requested, and neither is built.
