@@ -33,6 +33,7 @@ Variants {
 
         // Workspaces
         Row {
+            id: workspaces
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: 8
@@ -62,6 +63,46 @@ Variants {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: Hyprland.dispatch("workspace " + ws.modelData.id)
+                    }
+                }
+            }
+        }
+
+        // Favourite apps, launched from their desktop entries
+        Row {
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: workspaces.right
+            anchors.leftMargin: 24
+            spacing: 10
+
+            Repeater {
+                // Reading applications.values re-runs this once the entry list has loaded.
+                model: DesktopEntries.applications.values.length >= 0
+                    ? Favourites.apps.map(id => DesktopEntries.byId(id)).filter(e => e)
+                    : []
+
+                Item {
+                    id: fav
+                    required property var modelData
+                    width: 24
+                    height: bar.implicitHeight
+
+                    Image {
+                        anchors.centerIn: parent
+                        width: 22
+                        height: 22
+                        sourceSize: Qt.size(22, 22)
+                        source: Quickshell.iconPath(fav.modelData.icon, true)
+                        opacity: favMouse.containsMouse ? 1.0 : 0.8
+                    }
+                    MouseArea {
+                        id: favMouse
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onClicked: {
+                            bar.openPanel = "";
+                            fav.modelData.execute();
+                        }
                     }
                 }
             }
