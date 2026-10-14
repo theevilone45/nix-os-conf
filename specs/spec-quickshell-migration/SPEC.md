@@ -40,7 +40,7 @@ A vision and consolidation effort for a single-user NixOS/Hyprland desktop (3440
   - **success:** SUPER+R opens the launcher, typing filters installed apps, Enter launches the selection (terminal apps in kitty), and Esc closes it.
 - **CAP-9**
   - **intent:** The screen shown at boot is the same as the lock screen, and unlocking it logs the user into Hyprland.
-  - **success:** After boot the login screen looks identical to the lock screen, with no username field; it logs in the fixed user marcins. A wrong password stays on it, the correct one starts the Hyprland session on DP-1.
+  - **success:** After boot the login screen has the same clock and password layout as the lock screen on a plain dark background (no wallpaper), with no username field; it logs in the fixed user marcins. A wrong password stays on it, the correct one starts the Hyprland session on DP-1.
 - **CAP-10**
   - **intent:** Pinned application icons on the bar launch the user's favourite apps.
   - **success:** Clicking the qutebrowser, steam and zeditor icons starts each app. Editing the favourites file and redeploying changes the icons.
@@ -53,7 +53,7 @@ A vision and consolidation effort for a single-user NixOS/Hyprland desktop (3440
 - Single target: Hyprland on DP-1 at 3440×1440@144. No multi-monitor or laptop support.
 - The session lock must use `ext-session-lock`, so a crashed lock surface cannot expose the session. Authentication goes through the `quickshell` PAM service declared in `configuration.nix`.
 - Audio goes through PipeWire/WirePlumber and Bluetooth through BlueZ, using native Quickshell services; no new shell-script backends. The one exception is Bluetooth audio profile listing and switching, which calls `pactl` because Quickshell exposes no PipeWire card profiles.
-- The boot login uses greetd, with a Quickshell greeter talking to it through `Quickshell.Services.Greetd` (in 0.2.1). The greeter shares its QML with the lock screen so the two cannot diverge visually. SDDM is removed.
+- The boot login uses greetd, with a Quickshell greeter talking to it through `Quickshell.Services.Greetd` (in 0.2.1). The greeter shares its UI QML with the lock screen so the layouts cannot diverge, and runs under cage. Its QML reaches the greeter user through `/etc/nixos/quickshell`, copied by `rebuild.py -n`, because the greeter cannot read the home directory. SDDM is removed.
 - The favourites list lives in its own file, not in `Theme.qml`, and is a fixed list changed by editing the repo and redeploying.
 - Lock happens only on request (SUPER+L, power panel). No idle or suspend trigger exists.
 - `rebuild.py` copies files without recursing, so `quickshell/` stays flat, and every QML type must be listed in `quickshell/qmldir`.
@@ -77,6 +77,5 @@ The desktop runs on Quickshell alone, with waybar, rofi, hyprpaper and SDDM gone
 
 ## Assumptions
 
-- The greeter needs a minimal Wayland compositor to run Quickshell; which one is left to architecture.
-- A broken greeter must not leave the machine without a login path, so a TTY fallback is kept.
+- A broken greeter must not leave the machine without a login path, so a TTY fallback is kept (`cage -s` allows Ctrl+Alt+Fn).
 - Favourites launch through desktop entries, with icons from the icon theme.
