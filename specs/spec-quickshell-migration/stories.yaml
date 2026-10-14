@@ -48,3 +48,15 @@
     volume-key signals once CAP-1 to CAP-8 are at parity.
   spec_checkpoint: true
   done_checkpoint: true
+- id: "9"
+  title: Bar favourites
+  description: >-
+    Pinned qutebrowser, steam and zeditor icons on the bar, read from a
+    separate favourites file (CAP-10).
+- id: "10"
+  title: Boot greeter on greetd
+  description: >-
+    Replace SDDM with greetd and a Quickshell greeter that reuses the lock
+    screen UI and starts Hyprland (CAP-9); keep a TTY fallback.
+  spec_checkpoint: true
+  done_checkpoint: true

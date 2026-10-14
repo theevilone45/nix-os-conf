@@ -10,7 +10,7 @@ sources: []
 
 ## Why
 
-A vision and consolidation effort for a single-user NixOS/Hyprland desktop (3440×1440 ultrawide). The shell was split across waybar, three rofi-dmenu shell scripts, rofi's launcher, and hyprpaper. Each had its own config, theme and refresh hack (`pkill -RTMIN+8 waybar`), and the panels were text menus without sliders or per-app control. Quickshell gives one declaratively styled QML shell for bar, panels, launcher, wallpaper and lock screen, deployable through the existing `rebuild.py` workflow.
+A vision and consolidation effort for a single-user NixOS/Hyprland desktop (3440×1440 ultrawide). The shell was split across waybar, three rofi-dmenu shell scripts, rofi's launcher, and hyprpaper. Each had its own config, theme and refresh hack (`pkill -RTMIN+8 waybar`), and the panels were text menus without sliders or per-app control. Quickshell gives one declaratively styled QML shell for bar, panels, launcher, wallpaper, lock screen and boot login screen, deployable through the existing `rebuild.py` workflow. Boot is a few seconds on NVMe, so the user wants a password at login but no idle auto-lock or lock-on-suspend, and wants the apps used daily one click away.
 
 ## Capabilities
 
@@ -38,6 +38,12 @@ A vision and consolidation effort for a single-user NixOS/Hyprland desktop (3440
 - **CAP-8**
   - **intent:** The user can search and launch installed applications, replacing rofi drun.
   - **success:** SUPER+R opens the launcher, typing filters installed apps, Enter launches the selection (terminal apps in kitty), and Esc closes it.
+- **CAP-9**
+  - **intent:** The screen shown at boot is the same as the lock screen, and unlocking it logs the user into Hyprland.
+  - **success:** After boot the login screen looks identical to the lock screen, with no username field; it logs in the fixed user marcins. A wrong password stays on it, the correct one starts the Hyprland session on DP-1.
+- **CAP-10**
+  - **intent:** Pinned application icons on the bar launch the user's favourite apps.
+  - **success:** Clicking the qutebrowser, steam and zeditor icons starts each app. Editing the favourites file and redeploying changes the icons.
 
 ## Constraints
 
@@ -47,6 +53,9 @@ A vision and consolidation effort for a single-user NixOS/Hyprland desktop (3440
 - Single target: Hyprland on DP-1 at 3440×1440@144. No multi-monitor or laptop support.
 - The session lock must use `ext-session-lock`, so a crashed lock surface cannot expose the session. Authentication goes through the `quickshell` PAM service declared in `configuration.nix`.
 - Audio goes through PipeWire/WirePlumber and Bluetooth through BlueZ, using native Quickshell services; no new shell-script backends. The one exception is Bluetooth audio profile listing and switching, which calls `pactl` because Quickshell exposes no PipeWire card profiles.
+- The boot login uses greetd, with a Quickshell greeter talking to it through `Quickshell.Services.Greetd` (in 0.2.1). The greeter shares its QML with the lock screen so the two cannot diverge visually. SDDM is removed.
+- The favourites list lives in its own file, not in `Theme.qml`, and is a fixed list changed by editing the repo and redeploying.
+- Lock happens only on request (SUPER+L, power panel). No idle or suspend trigger exists.
 - `rebuild.py` copies files without recursing, so `quickshell/` stays flat, and every QML type must be listed in `quickshell/qmldir`.
 
 ## Non-goals
@@ -57,12 +66,17 @@ A vision and consolidation effort for a single-user NixOS/Hyprland desktop (3440
 - No microphone controls in the audio panel.
 - Waybar's CPU, temperature, RAM, network and window-title modules are dropped on purpose.
 - No multi-monitor support.
-- No SDDM login-screen replacement.
+- No idle auto-lock (hypridle) and no lock-on-suspend.
+- No favourites section in the launcher; the launcher stays plain search.
+- No running-state indicator or focus-existing-window behaviour on favourite icons.
+- No autologin; the user types a password at boot.
 
 ## Success signal
 
-The desktop runs on Quickshell alone, with waybar, rofi and hyprpaper gone from the repo and the system packages. Wallpaper, bar, launcher, audio panel, Bluetooth panel, power panel and lock screen all work as CAP-1 to CAP-8 describe.
+The desktop runs on Quickshell alone, with waybar, rofi, hyprpaper and SDDM gone from the repo and the system packages. Boot login, wallpaper, bar, favourites, launcher, audio panel, Bluetooth panel, power panel and lock screen all work as CAP-1 to CAP-10 describe.
 
-## Open Questions
+## Assumptions
 
-- Should idle auto-lock (hypridle) or lock-on-suspend be in scope? Neither was requested, and neither is built.
+- The greeter needs a minimal Wayland compositor to run Quickshell; which one is left to architecture.
+- A broken greeter must not leave the machine without a login path, so a TTY fallback is kept.
+- Favourites launch through desktop entries, with icons from the icon theme.
