@@ -4,4 +4,5 @@ ShellRoot {
     Wallpaper {}
     Bar {}
     Lock {}
+    Launcher {}
 }

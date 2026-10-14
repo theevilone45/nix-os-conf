@@ -8,3 +8,4 @@ AudioPanel AudioPanel.qml
 MixerRow MixerRow.qml
 VolumeSlider VolumeSlider.qml
 BluetoothPanel BluetoothPanel.qml
+Launcher Launcher.qml
