@@ -60,3 +60,9 @@
     screen UI and starts Hyprland (CAP-9); keep a TTY fallback.
   spec_checkpoint: true
   done_checkpoint: true
+- id: "11"
+  title: Wallpaper picker
+  description: >-
+    Bar button that opens yazi in kitty rooted at ~/Wallpapers, applies the
+    chosen image to the desktop and lock screen, and persists it in a state
+    file (CAP-11).

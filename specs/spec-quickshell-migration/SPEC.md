@@ -16,7 +16,7 @@ A vision and consolidation effort for a single-user NixOS/Hyprland desktop (3440
 
 - **CAP-1**
   - **intent:** The shell paints the desktop wallpaper on DP-1, replacing hyprpaper.
-  - **success:** With hyprpaper not installed, `~/Wallpapers/Unkown.jpg` shows on DP-1 after login. Changing the path in `quickshell/Theme.qml` and saving changes the image without restarting Hyprland.
+  - **success:** With hyprpaper not installed, `~/Wallpapers/Unkown.jpg` shows on DP-1 after login when no wallpaper has been chosen (CAP-11). Changing the default path in `quickshell/Theme.qml` and saving changes the image without restarting Hyprland.
 - **CAP-2**
   - **intent:** The user can lock the session and unlock it with their password; nothing is visible or interactive until authentication.
   - **success:** A wrong password stays locked, the correct one unlocks, and windows are neither visible nor clickable while locked. SUPER+L and the power panel both lock.
@@ -44,6 +44,9 @@ A vision and consolidation effort for a single-user NixOS/Hyprland desktop (3440
 - **CAP-10**
   - **intent:** Pinned application icons on the bar launch the user's favourite apps.
   - **success:** Clicking the qutebrowser, steam and zeditor icons starts each app. Editing the favourites file and redeploying changes the icons.
+- **CAP-11**
+  - **intent:** The user can choose the wallpaper from the bar by browsing files in yazi.
+  - **success:** A bar button opens yazi in kitty, rooted at `~/Wallpapers`. Opening an image there sets it on DP-1 and as the lock screen background immediately, and it is still the wallpaper after a Quickshell restart and a reboot. Quitting yazi without opening a file changes nothing.
 
 ## Constraints
 
@@ -55,6 +58,7 @@ A vision and consolidation effort for a single-user NixOS/Hyprland desktop (3440
 - Audio goes through PipeWire/WirePlumber and Bluetooth through BlueZ, using native Quickshell services; no new shell-script backends. The one exception is Bluetooth audio profile listing and switching, which calls `pactl` because Quickshell exposes no PipeWire card profiles.
 - The boot login uses greetd, with a Quickshell greeter talking to it through `Quickshell.Services.Greetd` (in 0.2.1). The greeter shares its UI QML with the lock screen so the layouts cannot diverge, and runs under cage. Only the files it imports (Greeter, LockContent, Theme) reach the greeter user, through `/etc/nixos/greeter`, copied by `rebuild.py -n`, because the greeter cannot read the home directory. SDDM is removed.
 - The favourites list lives in its own file, not in `Theme.qml`, and is a fixed list changed by editing the repo and redeploying.
+- The wallpaper picker is yazi started with `--chooser-file` inside kitty; the shell reads the chosen path when it exits. The chosen path is stored in a state file under `~/.local/state`, never in the repo or `~/.config/`; `Theme.qml` holds only the default used when nothing was chosen.
 - Lock happens only on request (SUPER+L, power panel). No idle or suspend trigger exists.
 - `rebuild.py` copies files without recursing, so `quickshell/` stays flat, and every QML type must be listed in `quickshell/qmldir`.
 
@@ -70,12 +74,15 @@ A vision and consolidation effort for a single-user NixOS/Hyprland desktop (3440
 - No favourites section in the launcher; the launcher stays plain search.
 - No running-state indicator or focus-existing-window behaviour on favourite icons.
 - No autologin; the user types a password at boot.
+- No in-shell file browser or thumbnail grid for wallpapers, and no preview panel requirement; yazi is the picker.
 
 ## Success signal
 
-The desktop runs on Quickshell alone, with waybar, rofi, hyprpaper and SDDM gone from the repo and the system packages. Boot login, wallpaper, bar, favourites, launcher, audio panel, Bluetooth panel, power panel and lock screen all work as CAP-1 to CAP-10 describe.
+The desktop runs on Quickshell alone, with waybar, rofi, hyprpaper and SDDM gone from the repo and the system packages. Boot login, wallpaper and wallpaper picker, bar, favourites, launcher, audio panel, Bluetooth panel, power panel and lock screen all work as CAP-1 to CAP-11 describe.
 
 ## Assumptions
 
 - A broken greeter must not leave the machine without a login path, so a TTY fallback is kept (`cage -s` allows Ctrl+Alt+Fn).
 - Favourites launch through desktop entries, with icons from the icon theme.
+- Opening a non-image file in the picker is ignored and leaves the wallpaper unchanged.
+- The kitty picker window is floated and sized by a Hyprland window rule; class and size are left to implementation.
