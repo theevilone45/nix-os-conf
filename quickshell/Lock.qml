@@ -11,7 +11,6 @@ import QtQuick
 Scope {
     id: root
 
-    property string wallpaper: ""
     property bool busy: false
     property string error: ""
     property string pending: ""
@@ -63,7 +62,7 @@ Scope {
 
             Image {
                 anchors.fill: parent
-                source: root.wallpaper === "" ? "" : "file://" + root.wallpaper
+                source: "file://" + Theme.wallpaper
                 fillMode: Image.PreserveAspectCrop
                 asynchronous: true
             }
