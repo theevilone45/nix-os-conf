@@ -3,7 +3,10 @@ import Quickshell.Wayland
 import QtQuick
 
 ShellRoot {
+    id: root
+
     Bar {}
+    Lock { wallpaper: root.wallpaper }
 
     // Edit and save to change the wallpaper; Quickshell reloads on save.
     property string wallpaper: Quickshell.env("HOME") + "/Wallpapers/Unkown.jpg"

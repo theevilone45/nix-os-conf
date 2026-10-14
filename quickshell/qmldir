@@ -1,3 +1,4 @@
 singleton Theme Theme.qml
 Bar Bar.qml
 Calendar Calendar.qml
+Lock Lock.qml

@@ -110,6 +110,9 @@
 
   # Enable sound with pipewire.
   security.rtkit.enable = true;
+
+  # PAM service used by the Quickshell lock screen (quickshell/Lock.qml)
+  security.pam.services.quickshell = { };
   services.pipewire = {
     enable = true;
     alsa.enable = true;
