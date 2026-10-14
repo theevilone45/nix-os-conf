@@ -23,6 +23,12 @@ Variants {
         implicitHeight: 30
         color: Theme.bg
 
+        // Which panel is open: "", "calendar" or "power". Only one at a time.
+        property string openPanel: ""
+        function toggle(name) {
+            openPanel = openPanel === name ? "" : name;
+        }
+
         // Workspaces
         Row {
             anchors.verticalCenter: parent.verticalCenter
@@ -63,8 +69,8 @@ Variants {
         Item {
             id: clock
             anchors.verticalCenter: parent.verticalCenter
-            anchors.right: parent.right
-            anchors.rightMargin: 8
+            anchors.right: powerButton.left
+            anchors.rightMargin: 16
             width: clockText.implicitWidth
             height: parent.height
 
@@ -82,7 +88,30 @@ Variants {
             }
             MouseArea {
                 anchors.fill: parent
-                onClicked: calendarPopup.visible = !calendarPopup.visible
+                onClicked: bar.toggle("calendar")
+            }
+        }
+
+        // Power trigger, opens the power panel
+        Item {
+            id: powerButton
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: parent.right
+            anchors.rightMargin: 8
+            width: powerText.implicitWidth
+            height: parent.height
+
+            Text {
+                id: powerText
+                anchors.centerIn: parent
+                text: "Power"
+                color: Theme.fg
+                font.family: Theme.font
+                font.pixelSize: Theme.fontSize
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: bar.toggle("power")
             }
         }
 
@@ -94,7 +123,7 @@ Variants {
             anchor.margins.top: 5
             implicitWidth: calendar.implicitWidth
             implicitHeight: calendar.implicitHeight
-            visible: false
+            visible: bar.openPanel === "calendar"
             color: "transparent"
 
             onVisibleChanged: if (visible) calendar.reset()
@@ -105,12 +134,30 @@ Variants {
             }
         }
 
-        // Close the calendar on outside click; the bar is included so
-        // clicking the clock toggles instead of close-then-reopen.
+        PopupWindow {
+            id: powerPopup
+            anchor.item: powerButton
+            anchor.edges: Edges.Bottom | Edges.Right
+            anchor.gravity: Edges.Bottom | Edges.Left
+            anchor.margins.top: 5
+            implicitWidth: powerPanel.implicitWidth
+            implicitHeight: powerPanel.implicitHeight
+            visible: bar.openPanel === "power"
+            color: "transparent"
+
+            PowerPanel {
+                id: powerPanel
+                anchors.fill: parent
+                onDone: bar.openPanel = ""
+            }
+        }
+
+        // Close any panel on outside click; the bar is included so clicking
+        // a trigger toggles instead of close-then-reopen.
         HyprlandFocusGrab {
-            windows: [calendarPopup, bar]
-            active: calendarPopup.visible
-            onCleared: calendarPopup.visible = false
+            windows: [calendarPopup, powerPopup, bar]
+            active: bar.openPanel !== ""
+            onCleared: bar.openPanel = ""
         }
     }
 }
