@@ -1,0 +1,50 @@
+- id: "1"
+  title: Scaffold Quickshell and paint the wallpaper
+  description: >-
+    Add the Quickshell package, a quickshell/ config dir, a rebuild.py component
+    and Hyprland exec-once, then show the wallpaper on DP-1 (CAP-1).
+  spec_checkpoint: true
+  done_checkpoint: true
+  invoke_dev_with: >-
+    First commit all current uncommitted changes in the repo, then checkout a
+    new branch and do all work for this spec there.
+- id: "2"
+  title: Minimal bar with clock and calendar
+  description: >-
+    Bar with workspaces, clock and panel triggers (CAP-7), plus the month
+    calendar opened from the clock (CAP-6).
+- id: "3"
+  title: Lock screen
+  description: >-
+    Session lock on ext-session-lock with password unlock via PAM (CAP-2),
+    triggerable by keybind.
+  spec_checkpoint: true
+  done_checkpoint: true
+- id: "4"
+  title: Power panel
+  description: >-
+    Panel with shutdown, reboot and lock, opened from the bar (CAP-3).
+- id: "5"
+  title: Audio mixer panel
+  description: >-
+    Output volume and mute, default output select with stream move, and per-app
+    stream volume, synced with the volume keys without a signal hack (CAP-4).
+  spec_checkpoint: true
+- id: "6"
+  title: Bluetooth devices panel
+  description: >-
+    Paired devices with connect/disconnect and audio profile switching for
+    connected devices; no scan or pairing (CAP-5).
+- id: "7"
+  title: Application launcher
+  description: >-
+    SUPER+R launcher with search and launch of installed apps, replacing rofi
+    drun (CAP-8).
+  done_checkpoint: true
+- id: "8"
+  title: Cutover from waybar, rofi and hyprpaper
+  description: >-
+    Remove waybar, rofi, hyprpaper, the old waybar scripts and the RTMIN+8
+    volume-key signals once CAP-1 to CAP-8 are at parity.
+  spec_checkpoint: true
+  done_checkpoint: true
