@@ -3,6 +3,7 @@ singleton Favourites Favourites.qml
 Bar Bar.qml
 Calendar Calendar.qml
 Lock Lock.qml
+LockContent LockContent.qml
 PowerPanel PowerPanel.qml
 Wallpaper Wallpaper.qml
 AudioPanel AudioPanel.qml

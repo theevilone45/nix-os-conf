@@ -80,13 +80,18 @@
     STARSHIP_CONFIG = "/home/marcins/.config/starship/starship.toml";
   };
 
-  # Display Manager - needed for graphical login
-  services.displayManager.sddm = {
+  # Login screen: greetd runs the Quickshell greeter (quickshell/Greeter.qml) under cage.
+  # ./quickshell is /etc/nixos/quickshell, copied there by `rebuild.py -n`, so the greeter
+  # user gets it from the Nix store. cage -s keeps Ctrl+Alt+Fn VT switching as a TTY fallback.
+  services.greetd = {
     enable = true;
-    wayland.enable = true;
+    settings.default_session = {
+      user = "greeter";
+      command = "${pkgs.coreutils}/bin/env XKB_DEFAULT_LAYOUT=pl ${pkgs.cage}/bin/cage -s -- ${pkgs.quickshell}/bin/quickshell -p ${./quickshell}/Greeter.qml";
+    };
   };
 
-  # Enable X server (needed for display manager)
+  # Enable X server (videoDrivers and xkb settings below hang off it)
   services.xserver.enable = true;
 
   # AMD GPU drivers
