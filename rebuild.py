@@ -25,18 +25,19 @@ DESTINATION_PATHS = {
     "starship": f"{USER_HOME}/.config/starship/starship.toml",
 }
 
-# The greetd greeter (nixos/configuration.nix) reads the Quickshell config from here,
-# because its user cannot read the home directory.
-NIXOS_QUICKSHELL_PATH = "/etc/nixos/quickshell/"
+# The greetd greeter (nixos/configuration.nix) reads these Quickshell files from here,
+# because its user cannot read the home directory. Only what the greeter imports is copied.
+NIXOS_GREETER_PATH = "/etc/nixos/greeter/"
+GREETER_FILES = ["Greeter.qml", "LockContent.qml", "Theme.qml"]
 
 def apply_nixos_rebuild():
     password = getpass("Enter sudo password: ")
     password_input = password + "\n"
     output = subprocess.run(["sudo", "-S", "cp", "-pv", LOCAL_CONFIG_PATHS["nixos"], DESTINATION_PATHS["nixos"]], stdout=subprocess.PIPE, stderr=subprocess.PIPE, input=password_input, encoding="utf-8")
     print(output.stdout)
-    output = subprocess.run(["sudo", "-S", "mkdir", "-p", NIXOS_QUICKSHELL_PATH], stdout=subprocess.PIPE, stderr=subprocess.PIPE, input=password_input, encoding="utf-8")
-    quickshell_files = glob.glob(f"{LOCAL_CONFIG_PATHS['quickshell']}*")
-    output = subprocess.run(["sudo", "-S", "cp", "-pv"] + quickshell_files + [NIXOS_QUICKSHELL_PATH], stdout=subprocess.PIPE, stderr=subprocess.PIPE, input=password_input, encoding="utf-8")
+    output = subprocess.run(["sudo", "-S", "mkdir", "-p", NIXOS_GREETER_PATH], stdout=subprocess.PIPE, stderr=subprocess.PIPE, input=password_input, encoding="utf-8")
+    greeter_files = [os.path.join(LOCAL_CONFIG_PATHS["quickshell"], name) for name in GREETER_FILES]
+    output = subprocess.run(["sudo", "-S", "cp", "-pv"] + greeter_files + [NIXOS_GREETER_PATH], stdout=subprocess.PIPE, stderr=subprocess.PIPE, input=password_input, encoding="utf-8")
     print(output.stdout)
     output = subprocess.run(["sudo", "-S", "nixos-rebuild", "switch"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, input=password_input, encoding="utf-8")
     print(output.stdout)
@@ -132,14 +133,16 @@ def check_diff(component):
         has_diff = True
 
     if component == "nixos":
-        output = subprocess.run(
-            ["diff", "-r", "-u", NIXOS_QUICKSHELL_PATH, LOCAL_CONFIG_PATHS["quickshell"]],
-            capture_output=True,
-            text=True
-        )
-        if output.stdout or output.returncode > 1:
-            print(output.stdout or f"{NIXOS_QUICKSHELL_PATH} is missing, it will be created.")
-            has_diff = True
+        for name in GREETER_FILES:
+            dest = os.path.join(NIXOS_GREETER_PATH, name)
+            output = subprocess.run(
+                ["diff", "-u", dest, os.path.join(LOCAL_CONFIG_PATHS["quickshell"], name)],
+                capture_output=True,
+                text=True
+            )
+            if output.stdout or output.returncode > 1:
+                print(output.stdout or f"{dest} is missing, it will be created.")
+                has_diff = True
 
     # Permission diff
     perm_diffs = compare_permissions(LOCAL_CONFIG_PATHS[component], DESTINATION_PATHS[component])

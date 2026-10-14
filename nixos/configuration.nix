@@ -80,16 +80,26 @@
     STARSHIP_CONFIG = "/home/marcins/.config/starship/starship.toml";
   };
 
-  # Login screen: greetd runs the Quickshell greeter (quickshell/Greeter.qml) under cage.
-  # ./quickshell is /etc/nixos/quickshell, copied there by `rebuild.py -n`, so the greeter
-  # user gets it from the Nix store. cage -s keeps Ctrl+Alt+Fn VT switching as a TTY fallback.
-  services.greetd = {
-    enable = true;
-    settings.default_session = {
-      user = "greeter";
-      command = "${pkgs.coreutils}/bin/env XKB_DEFAULT_LAYOUT=pl ${pkgs.cage}/bin/cage -s -- ${pkgs.quickshell}/bin/quickshell -p ${./quickshell}/Greeter.qml";
+  # Login screen: greetd runs the Quickshell greeter (Greeter.qml) under cage.
+  # ./greeter is /etc/nixos/greeter, holding only the files the greeter imports (copied by
+  # `rebuild.py -n`); the store copy below lets the greeter user read them. cage -s keeps
+  # Ctrl+Alt+Fn VT switching as a TTY fallback. QT_WAYLAND_DISABLE_WINDOWDECORATION hides
+  # the Qt client-side title bar/border that cage does not draw over.
+  services.greetd =
+    let
+      greeterShell = pkgs.runCommand "quickshell-greeter" { } ''
+        mkdir $out
+        cp ${./greeter}/*.qml $out/
+        printf 'singleton Theme Theme.qml\nLockContent LockContent.qml\n' > $out/qmldir
+      '';
+    in
+    {
+      enable = true;
+      settings.default_session = {
+        user = "greeter";
+        command = "${pkgs.coreutils}/bin/env XKB_DEFAULT_LAYOUT=pl QT_WAYLAND_DISABLE_WINDOWDECORATION=1 ${pkgs.cage}/bin/cage -s -- ${pkgs.quickshell}/bin/quickshell -p ${greeterShell}/Greeter.qml";
+      };
     };
-  };
 
   # Enable X server (videoDrivers and xkb settings below hang off it)
   services.xserver.enable = true;
