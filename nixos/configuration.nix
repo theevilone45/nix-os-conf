@@ -204,10 +204,7 @@
     rose-pine-hyprcursor
     # Hyprland related packages
     kitty
-    waybar
     dunst
-    rofi
-    hyprpaper
     quickshell
     hyprcursor
     hyprshot

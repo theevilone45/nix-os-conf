@@ -12,8 +12,6 @@ USER_HOME = os.path.expanduser("~")
 LOCAL_CONFIG_PATHS = {
     "nixos": "./nixos/configuration.nix",
     "hyprland": "./hyprland/",
-    "waybar": "./waybar/",
-    "rofi": "./rofi/",
     "kitty": "./kitty/",
     "quickshell": "./quickshell/",
     "starship": "./starship/starship.toml",
@@ -22,8 +20,6 @@ LOCAL_CONFIG_PATHS = {
 DESTINATION_PATHS = {
     "nixos": "/etc/nixos/configuration.nix",
     "hyprland": f"{USER_HOME}/.config/hypr/.",
-    "waybar": f"{USER_HOME}/.config/waybar/.",
-    "rofi": f"{USER_HOME}/.config/rofi/.",
     "kitty": f"{USER_HOME}/.config/kitty/.",
     "quickshell": f"{USER_HOME}/.config/quickshell/.",
     "starship": f"{USER_HOME}/.config/starship/starship.toml",
@@ -46,13 +42,6 @@ def apply_standard_rebuild(component: str):
 def apply_hyprland_rebuild():
     apply_standard_rebuild("hyprland")
 
-def apply_waybar_rebuild():
-    apply_standard_rebuild("waybar")
-
-def apply_rofi_rebuild():
-    apply_standard_rebuild("rofi")
-
-
 def apply_kitty_rebuild():
     apply_standard_rebuild("kitty")
 
@@ -65,8 +54,6 @@ def apply_starship_rebuild():
 APPLY_COMMANDS = {
     "nixos": apply_nixos_rebuild,
     "hyprland": apply_hyprland_rebuild,
-    "waybar": apply_waybar_rebuild,
-    "rofi": apply_rofi_rebuild,
     "kitty": apply_kitty_rebuild,
     "quickshell": apply_quickshell_rebuild,
     "starship": apply_starship_rebuild,
@@ -80,8 +67,6 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description="A script that can be used to rebuild NixOs configuration as well as Hyprland configuration files.")
     parser.add_argument("-n", "--nixos", action="store_true", default=False, help="Rebuild NixOs configuration, this option require sudo privileges")
     parser.add_argument("-p", "--hyprland", action="store_true", default=False, help="Rebuild Hyprland configuration files")
-    parser.add_argument("-w", "--waybar", action="store_true", default=False, help="Rebuild Waybar configuration files")
-    parser.add_argument("-r", "--rofi", action="store_true", default=False, help="Rebuild Rofi configuration files")
     parser.add_argument("-k", "--kitty", action="store_true", default=False, help="Rebuild Kitty configuration files")
     parser.add_argument("-q", "--quickshell", action="store_true", default=False, help="Rebuild Quickshell configuration files")
     parser.add_argument("-s", "--starship", action="store_true", default=False, help="Rebuild Starship configuration files")
@@ -174,8 +159,6 @@ def main():
     if args.all:
         args.nixos = True
         args.hyprland = True
-        args.waybar = True
-        args.rofi = True
         args.kitty = True
         args.quickshell = True
         args.starship = True
