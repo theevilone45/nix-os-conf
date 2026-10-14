@@ -15,6 +15,7 @@ LOCAL_CONFIG_PATHS = {
     "waybar": "./waybar/",
     "rofi": "./rofi/",
     "kitty": "./kitty/",
+    "quickshell": "./quickshell/",
     "starship": "./starship/starship.toml",
 }
 
@@ -24,6 +25,7 @@ DESTINATION_PATHS = {
     "waybar": f"{USER_HOME}/.config/waybar/.",
     "rofi": f"{USER_HOME}/.config/rofi/.",
     "kitty": f"{USER_HOME}/.config/kitty/.",
+    "quickshell": f"{USER_HOME}/.config/quickshell/.",
     "starship": f"{USER_HOME}/.config/starship/starship.toml",
 }
 
@@ -54,6 +56,9 @@ def apply_rofi_rebuild():
 def apply_kitty_rebuild():
     apply_standard_rebuild("kitty")
 
+def apply_quickshell_rebuild():
+    apply_standard_rebuild("quickshell")
+
 def apply_starship_rebuild():
     apply_standard_rebuild("starship")
 
@@ -63,6 +68,7 @@ APPLY_COMMANDS = {
     "waybar": apply_waybar_rebuild,
     "rofi": apply_rofi_rebuild,
     "kitty": apply_kitty_rebuild,
+    "quickshell": apply_quickshell_rebuild,
     "starship": apply_starship_rebuild,
 }
 
@@ -77,6 +83,7 @@ def parse_arguments():
     parser.add_argument("-w", "--waybar", action="store_true", default=False, help="Rebuild Waybar configuration files")
     parser.add_argument("-r", "--rofi", action="store_true", default=False, help="Rebuild Rofi configuration files")
     parser.add_argument("-k", "--kitty", action="store_true", default=False, help="Rebuild Kitty configuration files")
+    parser.add_argument("-q", "--quickshell", action="store_true", default=False, help="Rebuild Quickshell configuration files")
     parser.add_argument("-s", "--starship", action="store_true", default=False, help="Rebuild Starship configuration files")
     parser.add_argument("-a", "--all", action="store_true", default=False, help="Rebuild all configurations")
     parser.add_argument("-d", "--diff", action="store_true", default=False, help="Only show differences instead of rebuilding")
@@ -170,6 +177,7 @@ def main():
         args.waybar = True
         args.rofi = True
         args.kitty = True
+        args.quickshell = True
         args.starship = True
 
     dispach_action(args)

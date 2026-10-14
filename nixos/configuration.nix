@@ -205,6 +205,7 @@
     dunst
     rofi
     hyprpaper
+    quickshell
     hyprcursor
     hyprshot
     hyprpicker
